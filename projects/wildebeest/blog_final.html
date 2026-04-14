@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do Wildebeest Improve Soil Carbon? — Festus Bett</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --green:#16A34A; --green-l:#22C55E; --green-dim:#DCFCE7;
+    --navy:#0D1B2A; --body:#374151; --muted:#6B7280; --dim:#9CA3AF;
+    --bg:#F9FAFB; --white:#FFFFFF; --border:rgba(0,0,0,.08);
+    --shadow:0 2px 12px rgba(0,0,0,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);line-height:1.7}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.75rem 2rem;display:flex;justify-content:space-between;align-items:center}
+  .nav-brand{font-family:'Lora',serif;font-weight:700;color:var(--navy);font-size:1.05rem}
+  .nav-brand span{color:var(--green)}
+  .nav-links{display:flex;gap:1.5rem;font-size:.85rem}
+  .nav-links a{color:var(--muted);text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--green)}
+  .nav-tag{background:var(--green-dim);color:var(--green);padding:.2rem .7rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.04em}
+
+  /* HERO */
+  .hero{max-width:780px;margin:4rem auto 0;padding:0 2rem}
+  .hero-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap}
+  .tag{background:var(--green-dim);color:var(--green);padding:.25rem .8rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .tag.blue{background:#EFF6FF;color:#1D4ED8}
+  .tag.amber{background:#FFFBEB;color:#92400E}
+  .hero-date{font-size:.8rem;color:var(--dim);font-family:'DM Mono',monospace}
+  h1.hero-title{font-family:'Lora',serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;line-height:1.25;color:var(--navy);margin-bottom:1.1rem}
+  h1.hero-title em{color:var(--green);font-style:normal}
+  .hero-sub{font-size:1.05rem;color:var(--body);max-width:640px;line-height:1.8;margin-bottom:1.5rem}
+  .hero-byline{display:flex;align-items:center;gap:.75rem;padding:1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:2.5rem}
+  .avatar{width:38px;height:38px;border-radius:50%;background:var(--green);display:grid;place-items:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0}
+  .byline-text{font-size:.82rem}
+  .byline-name{font-weight:600;color:var(--navy)}
+  .byline-role{color:var(--muted)}
+
+  /* HERO IMAGE */
+  .hero-img{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+  .img-caption{text-align:center;font-size:.75rem;color:var(--dim);margin-top:.6rem;font-family:'DM Mono',monospace}
+
+  /* ARTICLE */
+  article{max-width:780px;margin:0 auto;padding:0 2rem 4rem}
+  h2{font-family:'Lora',serif;font-size:1.45rem;font-weight:700;color:var(--navy);margin:2.5rem 0 .75rem;line-height:1.35}
+  p{margin-bottom:1.1rem;font-size:.97rem;color:var(--body);line-height:1.8}
+  strong{color:var(--navy);font-weight:600}
+  ol{margin:1rem 0 1.1rem 1.5rem}
+  ol li{font-size:.97rem;color:var(--body);line-height:1.8;margin-bottom:.6rem}
+
+  /* PULLQUOTE */
+  blockquote{border-left:3px solid var(--green);padding:.75rem 1.25rem;margin:1.75rem 0;background:var(--green-dim);border-radius:0 8px 8px 0}
+  blockquote p{color:#166534;font-style:italic;font-family:'Lora',serif;font-size:1rem;margin:0}
+
+  /* STAT CARDS */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.75rem 0}
+  .stat-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;box-shadow:var(--shadow)}
+  .stat-card.green{border-top:3px solid var(--green)}
+  .stat-card.blue{border-top:3px solid #2563EB}
+  .stat-card.amber{border-top:3px solid #D97706}
+  .stat-num{font-family:'Lora',serif;font-size:1.8rem;font-weight:700;color:var(--navy);line-height:1}
+  .stat-num span{color:var(--green)}
+  .stat-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.3rem;font-weight:500}
+  .stat-sub{font-size:.72rem;color:var(--dim);margin-top:.25rem}
+
+  /* CHARTS */
+  .chart-wrap{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin:1.75rem 0;box-shadow:var(--shadow)}
+  .chart-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:.25rem;font-family:'DM Mono',monospace}
+  .chart-desc{font-size:.82rem;color:var(--body);margin-bottom:1.1rem;line-height:1.5}
+  .chart-canvas{position:relative;height:260px}
+  .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.75rem 0}
+
+  /* MAP PREVIEW */
+  .map-preview{background:var(--navy);border-radius:16px;padding:2rem;margin:2rem 0;position:relative;overflow:hidden}
+  .map-preview::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2322C55E' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+  .map-preview-inner{position:relative;z-index:1}
+  .map-preview h3{color:#fff;margin:0 0 .5rem;font-size:1.1rem;font-family:'DM Sans',sans-serif}
+  .map-preview p{color:rgba(255,255,255,.65);font-size:.85rem;margin-bottom:1.25rem}
+  .map-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;padding:.6rem 1.25rem;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600;transition:background .2s}
+  .map-btn:hover{background:#15803D}
+
+  /* LEGEND */
+  .legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;margin:.75rem 0}
+  .legend-item{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted)}
+  .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+  /* FOOTER */
+  footer{background:var(--navy);color:rgba(255,255,255,.6);text-align:center;padding:2rem;font-size:.8rem}
+  footer a{color:var(--green-l);text-decoration:none}
+
+  @media(max-width:600px){
+    .stat-row{grid-template-columns:1fr}
+    .chart-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Check out <span>my other projects</span></div>
+</nav>
+
+<div class="hero">
+  <h1 class="hero-title">Do Migratory Wildebeest Grazing <em>Influence</em> Soil Organic Carbon Stocks in the Mara–Serengeti Ecosystem?</h1>
+
+  <p class="hero-sub">Each year, over a million wildebeests along with other wild herbivores such as zebras and gazelles move across the Mara–Serengeti ecosystem in a continuous cyclical search for fresh pasture and water, forming one of the most iconic wildlife migrations on Earth. But beyond this spectacular event, something far more critical may be happening beneath their hooves: a process that links directly to the global carbon cycle and by extension the fight against climate change.</p>
+
+</div>
+
+
+
+<article>
+
+  <!-- BACKGROUND -->
+  <h2>Background</h2>
+  <p>Grasslands such as the Mara-Serengeti cover about 40% of the Earth's land surface (excluding Greenland and Antarctica). Soils in these ecosystems play a crucial role in the global carbon cycle and climate regulation by storing soil organic carbon (SOC), the largest terrestrial carbon reservoir. However, in these ecosystems, the loss or accumulation of soil carbon is strongly influenced by vegetation productivity and disturbance regimes, such as grazing, amongst other factors.</p>
+
+  <p><strong>The question:</strong> Does this cyclical migratory grazing, as a disturbance regime, influence soil organic carbon stocks?</p>
+
+  <p>To understand this relationship, it is essential to consider how wildebeest grazing influences vegetation productivity. Through their cyclical grazing, wildebeests remove aboveground biomass, which stimulate new growth, maintaining grasses in an active, productive state. At the same time, nutrient inputs from their dung and urine improve soil fertility, further supporting vegetation productivity. Since SOC is largely derived from plant inputs which include roots, litter, and organic matter, any process that influences vegetation productivity ultimately affect the accrual or loss of SOC in the soil. In this way, wildebeest grazing in the Mara–Serengeti has the potential to indirectly regulate SOC through its effects on vegetation productivity.</p>
+
+  <div class="map-preview">
+    <div class="map-preview-inner">
+      <h3>Explore the Interactive Dashboard</h3>
+      <p>Toggle layers: grazing intensity · SOC distribution · rainfall · SOC residuals · elevation · Wildebeest GPS sightings across 5 grazing seasons</p>
+      <a class="map-btn" href="wildebeest_static.html" target="_blank">Open Interactive Dashboard →</a>
+    </div>
+  </div>
+
+  <!-- KEY FINDINGS -->
+  <h2>Key Findings</h2>
+
+  <div class="stat-row" style="grid-template-columns:1fr 1fr">
+    <div class="stat-card">
+      <div class="stat-label">SOC in Grazed Areas vs SOC in Ungrazed Areas</div>
+      <div class="stat-num">51.3 <span style="font-size:1.1rem;color:#0D1B2A;font-weight:700">VS</span> 52.4</div>
+      <div class="stat-sub">Mean tonnes of C/ha</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Residual SOC in Grazed Areas vs in Ungrazed Areas</div>
+      <div class="stat-num"><span>+2.16</span> <span style="font-size:1.1rem;color:#0D1B2A;font-weight:700">vs</span> <span style="color:#6B7280">−3.14</span></div>
+      <div class="stat-sub">Mean tonnes of C/ha</div>
+    </div>
+  </div>
+
+  <!-- FORAGE AVAILABILITY -->
+  <h2>Forage Availability and Wildebeest Migration</h2>
+  <p>Rainfall is a dominant factor structuring vegetation growth across the Mara–Serengeti ecosystem. Seasonal patterns in precipitation creates a dynamic availability of forage.</p>
+   <div class="map-preview">
+    <div class="map-preview-inner">
+      <h3>Check out the animated map of the wildebeest migration</h3>
+      <p>Mapped from 128k+ Wildebeest GPS sightings from 2013-2017</p>
+      <a class="map-btn" href="wildebeest_static.html" target="_blank">Check it Out →</a>
+    </div>
+  </div>
+  
+  <div class="chart-wrap">
+    <div class="chart-title">Seasonal Rainfall (mm) vs Mean NDVI · 2019</div>
+    <div class="chart-desc">Peak NDVI follows peak rainfall, reflecting a lagged vegetation response.</div>
+    <div class="chart-canvas">
+      <canvas id="c-rainfall"></canvas>
+    </div>
+  </div>
+
+  <p>In response, wildebeests' movement appear to be closely aligned with the dynamic availability of forage. Wildebeests, which preferentially grazed on short, nutrient-rich grass, appear to track areas that recently received rainfall and concentrate where grass regrowth is highest.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">NDVI by Grazing Intensity per Season</div>
+    <blockquote style="margin:0 0 1.1rem 0"><p>"Wildebeests exhibit forage-tracking behaviour, concentrating grazing pressure in areas with most vegetation."</p></blockquote>
+    <div class="chart-canvas" style="height:300px">
+      <canvas id="c-ndvi-cls"></canvas>
+    </div>
+  </div>
+
+  <p>Moreover, this grazing appears to influence how vegetation respond to subsequent rainfall. Areas that experienced prior grazing showed enhanced regrowth once rain fell, compared to areas that were lightly or mildly grazed, or the areas avoided altogether. This suggests that wildebeest grazing does not suppress vegetation growth, but appears to stimulate vegetation productivity by maintaining grasses in an active growth state, indicating a positive feedback between grazing and vegetation dynamics.</p>
+
+  <div class="chart-grid">
+    <div class="chart-wrap" style="margin:0">
+      <div class="chart-title">Vegetation Regrowth After Rainfall — Dry Season</div>
+      <div class="chart-desc">Areas grazed during the Aug–Oct dry season were revisited in Nov–Dec to assess whether prior grazing stimulated vegetation regrowth following the short rains.</div>
+      <div class="chart-canvas">
+        <canvas id="c-lag-augoct"></canvas>
+      </div>
+    </div>
+    <div class="chart-wrap" style="margin:0">
+      <div class="chart-title">Vegetation Regrowth After Rainfall — Wet Season</div>
+      <div class="chart-desc">Areas grazed during Jan–Mar (peak wet season) were assessed in the following Apr–May (late wet season) to determine whether grazing stimulated or suppressed vegetation growth.</div>
+      <div class="chart-canvas">
+        <canvas id="c-lag-janmar"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <p>A comparison between the protected area and the surrounding unprotected area further highlighted differences in vegetation productivity. The protected area, which experienced concentrated and consistent grazing by wildebeests, showed a stronger vegetation response to rainfall. In contrast, the unprotected areas exhibited a relatively stable vegetation productivity showing a weaker response to rainfall. This pattern may have been associated with land uses such as agriculture within the unprotected area around the Mara–Serengeti ecosystem that remain same through the year.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Vegetation Analysis: Protected Area vs Area Beyond Protected Area</div>
+    <div class="chart-desc">The protected area showed a greater seasonal NDVI change (Δ+0.066 units), about 4.5 times more than the surrounding unprotected area (Δ+0.015), suggesting that migratory wildebeest grazing amplifies vegetation responsiveness to rainfall within the protected ecosystem.</div>
+    <div class="chart-canvas">
+      <canvas id="c-pa"></canvas>
+    </div>
+  </div>
+
+  <!-- SOC SECTION -->
+  <h2>So does Grazing Influence Soil Organic Carbon?</h2>
+  <p>At a glance, SOC between grazed and ungrazed areas within the protected area showed no substantial difference.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Mean SOC Stock by Area (t C/ha)</div>
+    <div class="chart-desc">Grazed areas (51.31 t C/ha) and ungrazed areas (52.42 t C/ha) within the protected zone show comparable raw SOC values.</div>
+    <div class="chart-canvas">
+      <canvas id="c-soc"></canvas>
+    </div>
+  </div>
+
+  <p>However, elevation emerged as a key confounding factor influencing SOC distribution. Therefore, SOC values were normalised for the effects of elevation, in order to isolate the influence of grazing on SOC stocks within the Mara–Serengeti ecosystem. <em>Grazed areas showed higher residual SOC than ungrazed areas.</em></p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Mean Residual SOC in Grazed areas vs in Ungrazed areas (t C/ha)</div>
+    <div class="chart-desc">After controlling for the confounding effect of elevation via OLS regression, grazed areas showed a mean residual SOC of +2.16 t C/ha, while ungrazed areas averaged −3.14 t C/ha.</div>
+    <div class="chart-canvas" style="height:220px">
+      <canvas id="c-resid"></canvas>
+    </div>
+  </div>
+
+  <p>Grazed areas, which demonstrated enhanced vegetation regrowth, provided a continuous input of organic matter to the soil through both above and below ground biomass. In contrast, areas that were lightly grazed or were never grazed at all showed weaker vegetation responses and reduced organic matter inputs, which may have limited SOC accumulation over time.</p>
+
+  <p>A multivariate regression analysis to assess the relative influence of elevation, grazing, and climate (precipitation) on SOC indicated that elevation was the dominant factor (β=0.67), reflecting its strong control over decomposition rates. Grazing emerged as the second strongest factor (β=0.32), demonstrating a significant influence on SOC. In contrast, precipitation showed only a marginal effect (β=0.05), indicating that while it strongly influenced vegetation productivity, its direct contribution to SOC was comparatively limited.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Standardised Effect Size on SOC</div>
+    <div class="chart-desc">Elevation dominates (β=0.67), followed by grazing (β=0.32), which remains statistically significant after controlling for all other predictors. Rainfall contributes only marginally (β=0.05). Overall model fit: R²=0.45.</div>
+    <div class="chart-canvas" style="height:200px">
+      <canvas id="c-drivers"></canvas>
+    </div>
+  </div>
+
+  <!-- LIMITATIONS -->
+  <h2>Limitations</h2>
+  <p>While this study provided insights into how grazing may be influencing SOC in the Mara-Serengeti, several limitations should be considered.</p>
+  <ol>
+    <li>This study focused primarily on wildebeests. However, in the Serengeti–Mara ecosystem, wildebeest migration occurred in conjunction with other large herbivores, including zebras, gazelles, and buffalo. These species differed in grazing behaviour, diet selection, and spatial use of the landscape, and may also have contributed differently to vegetation dynamics which affected SOC storage.</li>
+    <li>The analysis relied on remotely sensed data and global soil carbon datasets, which, although suitable for large-scale assessments, may not have fully captured fine-scale spatial variability in SOC. Ground-based measurements would have provided higher accuracy and helped validate these patterns.</li>
+    <li>Grazing intensity was inferred from wildebeest movement data rather than directly measured in terms of biomass removal. As such, it represented a proxy rather than a direct quantification of grazing impact.</li>
+    <li>Additionally, while elevation was accounted for as a key confounding variable, other environmental factors such as soil properties, microclimate variations, and land use practices may also have influenced SOC distribution and were not explicitly controlled for.</li>
+  </ol>
+
+</article>
+
+<footer>
+  <p style="margin-bottom:.4rem">Festus Kiprono Bett · Keele University 2025</p>
+</footer>
+
+<script>
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.color = '#6B7280';
+Chart.defaults.borderColor = 'rgba(0,0,0,.06)';
+
+const blue = 'rgba(37,99,235,.65)';
+
+// 1. Rainfall vs NDVI
+new Chart(document.getElementById('c-rainfall'), {
+  data: {
+    labels: ['Jan–Mar','Apr–May','Jun–Jul','Aug–Oct','Nov–Dec'],
+    datasets: [
+      {type:'bar', label:'Rainfall (mm)', data:[207.5,125.5,29.9,37.0,183.5],
+       backgroundColor:'rgba(37,99,235,.35)', yAxisID:'yR', borderRadius:4, borderSkipped:false},
+      {type:'line', label:'Mean NDVI', data:[0.493,0.404,0.330,0.251,0.438],
+       borderColor:'#16A34A', backgroundColor:'rgba(22,163,74,.08)',
+       pointBackgroundColor:'#16A34A', pointRadius:5, borderWidth:2.5,
+       tension:.35, fill:true, yAxisID:'yN'}
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{labels:{boxWidth:10,font:{size:11}}}},
+    scales:{
+      yR:{type:'linear',position:'left',title:{display:true,text:'Rainfall (mm)',color:blue},ticks:{color:blue},grid:{color:'rgba(0,0,0,.05)'}},
+      yN:{type:'linear',position:'right',min:0.15,max:0.6,title:{display:true,text:'NDVI',color:'#16A34A'},ticks:{color:'#16A34A'},grid:{display:false}},
+      x:{ticks:{color:'#6B7280'},grid:{display:false}}
+    }
+  }
+});
+
+// 2. NDVI by grazing intensity class per season — exact web app version
+const SL = ['Jan-Mar','Apr-May','Jun-Jul','Aug-Oct','Nov-Dec'];
+const CL = ['Ungrazed areas','Areas of low grazing intensity','Areas of moderate grazing intensity','Areas of high grazing intensity'];
+const NC = {'Jan-Mar':[0.5026,0.4903,0.4757,0.4881],'Apr-May':[0.3890,0.4225,0.4043,0.5021],'Jun-Jul':[0.2782,0.3646,0.3773,0.3565],'Aug-Oct':[0.2078,0.2590,0.2722,0.2658],'Nov-Dec':[0.3614,0.3956,0.4206,0.6713]};
+const CC = ['rgba(90,78,64,.8)','rgba(107,158,62,.8)','rgba(212,168,83,.8)','rgba(200,82,42,.9)'];
+new Chart(document.getElementById('c-ndvi-cls'), {
+  type:'bar',
+  data:{
+    labels: SL,
+    datasets: CL.map((lbl,i) => ({
+      label: lbl,
+      data: SL.map(s => NC[s][i]),
+      backgroundColor: CC[i],
+      borderRadius: 3,
+      borderSkipped: false
+    }))
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{labels:{boxWidth:10,font:{size:10},color:'#111827'}}},
+    scales:{
+      y:{min:0.15,title:{display:true,text:'Mean NDVI',color:'#374151'},ticks:{color:'#374151'},grid:{color:'rgba(0,0,0,.08)'}},
+      x:{ticks:{color:'#374151'},grid:{display:false}}
+    }
+  }
+});
+
+// 3a. Vegetation regrowth — dry season lag (Aug–Oct → Nov–Dec)
+new Chart(document.getElementById('c-lag-augoct'), {
+  type:'bar',
+  data:{
+    labels:['Ungrazed areas','Areas of low grazing intensity','Areas of moderate grazing intensity','Areas of high grazing intensity'],
+    datasets:[
+      {label:'Aug–Oct', data:[0.2078,0.2590,0.2722,0.2658],
+       backgroundColor:'rgba(107,163,190,.65)', borderRadius:3, borderSkipped:false},
+      {label:'Nov–Dec', data:[0.3347,0.4657,0.5101,0.5485],
+       backgroundColor:'rgba(200,82,42,.85)', borderRadius:3, borderSkipped:false}
+    ]
+  },
+  options:{responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{labels:{boxWidth:10,font:{size:10},color:'#111827'}}},
+    scales:{
+      y:{min:0.15,title:{display:true,text:'Mean NDVI',color:'#374151'},ticks:{color:'#374151'},grid:{color:'rgba(0,0,0,.08)'}},
+      x:{ticks:{color:'#374151',font:{size:9}},grid:{display:false}}
+    }
+  }
+});
+
+// 3b. Vegetation regrowth — wet season lag (Jan–Mar → Apr–May)
+new Chart(document.getElementById('c-lag-janmar'), {
+  type:'bar',
+  data:{
+    labels:['Ungrazed areas','Areas of low grazing intensity','Areas of moderate grazing intensity','Areas of high grazing intensity'],
+    datasets:[
+      {label:'Jan–Mar', data:[0.5026,0.4903,0.4757,0.4881],
+       backgroundColor:'rgba(107,158,62,.65)', borderRadius:3, borderSkipped:false},
+      {label:'Apr–May', data:[0.3972,0.3976,0.3554,0.5271],
+       backgroundColor:'rgba(200,82,42,.85)', borderRadius:3, borderSkipped:false}
+    ]
+  },
+  options:{responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{labels:{boxWidth:10,font:{size:10},color:'#111827'}}},
+    scales:{
+      y:{min:0.3,title:{display:true,text:'Mean NDVI',color:'#374151'},ticks:{color:'#374151'},grid:{color:'rgba(0,0,0,.08)'}},
+      x:{ticks:{color:'#374151',font:{size:9}},grid:{display:false}}
+    }
+  }
+});
+
+// 4. Mean SOC stock by area type
+new Chart(document.getElementById('c-soc'), {
+  type:'bar',
+  data:{
+    labels:['20km Buffer (Unprotected)','Grazed (Protected)','Ungrazed (Protected)'],
+    datasets:[{
+      data:[44.50,51.31,52.42],
+      backgroundColor:['rgba(107,163,190,.7)','rgba(22,163,74,.75)','rgba(107,114,128,.6)'],
+      borderRadius:6, borderSkipped:false
+    }]
+  },
+  options:{indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},
+             tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x.toFixed(2)} t C/ha`}}},
+    scales:{
+      x:{min:40,title:{display:true,text:'Mean SOC (t C/ha)',color:'#6B7280'},
+         ticks:{color:'#6B7280'},grid:{color:'rgba(0,0,0,.05)'}},
+      y:{ticks:{color:'#0D1B2A',font:{size:12}},grid:{display:false}}
+    }
+  }
+});
+
+// 5. Residual SOC
+new Chart(document.getElementById('c-resid'), {
+  type:'bar',
+  data:{
+    labels:['Grazed areas','Ungrazed areas'],
+    datasets:[{
+      data:[2.16,-3.14],
+      backgroundColor:['rgba(22,163,74,.8)','rgba(107,114,128,.6)'],
+      borderRadius:6, borderSkipped:false
+    }]
+  },
+  options:{responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},
+             tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y>0?'+':''}${ctx.parsed.y} t C/ha`}}},
+    scales:{
+      y:{suggestedMin:-4,suggestedMax:3,ticks:{color:'#6B7280'},grid:{color:'rgba(0,0,0,.05)'}},
+      x:{ticks:{color:'#0D1B2A',font:{size:13}},grid:{display:false}}
+    }
+  }
+});
+
+// 6. SOC drivers
+new Chart(document.getElementById('c-drivers'), {
+  type:'bar',
+  data:{
+    labels:['Elevation','Grazing','Rainfall'],
+    datasets:[{
+      data:[0.67,0.32,0.05],
+      backgroundColor:['rgba(22,163,74,.8)','rgba(37,99,235,.7)','rgba(107,114,128,.5)'],
+      borderRadius:4, borderSkipped:false
+    }]
+  },
+  options:{indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{min:0,max:0.8,title:{display:true,text:'Standardised effect (|β|)',color:'#6B7280'},
+         ticks:{color:'#6B7280'},grid:{color:'rgba(0,0,0,.05)'}},
+      y:{ticks:{color:'#0D1B2A',font:{size:13}},grid:{display:false}}
+    }
+  }
+});
+
+// 7. Protected area vs buffer zone
+new Chart(document.getElementById('c-pa'), {
+  type:'bar',
+  data:{
+    labels:['Protected Area','20km Buffer Zone'],
+    datasets:[
+      {label:'Jun–Jul (Dry)', data:[0.2996,0.3820],
+       backgroundColor:'rgba(217,119,6,.7)', borderRadius:4, borderSkipped:false},
+      {label:'Nov–Dec (Wet)', data:[0.3657,0.3974],
+       backgroundColor:'rgba(22,163,74,.75)', borderRadius:4, borderSkipped:false}
+    ]
+  },
+  options:{responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{labels:{boxWidth:10,font:{size:11}}}},
+    scales:{
+      y:{min:0.25,title:{display:true,text:'Mean NDVI',color:'#6B7280'},
+         ticks:{color:'#6B7280'},grid:{color:'rgba(0,0,0,.05)'}},
+      x:{ticks:{color:'#0D1B2A',font:{size:13}},grid:{display:false}}
+    }
+  }
+});
+</script>
+</body>
+</html>
