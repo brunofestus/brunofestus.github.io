@@ -259,6 +259,7 @@ footer{
   footer{padding:6px 14px}
   .tl-label{display:none}
 }
+footer{display:none !important}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -284,6 +285,7 @@ footer{
     <div class="north-arrow">N</div>
     <div class="scale-bar"><div class="s-line"></div><span>~50 km</span></div>
     <div id="tooltip"></div>
+    <div style="position:absolute;bottom:6px;left:8px;font-family:'DM Sans',sans-serif;font-size:9px;color:rgba(0,0,0,.45);pointer-events:none;z-index:10;">WGS84 · EPSG:4326</div>
     <div id="herd-label"></div>
   </div>
 
