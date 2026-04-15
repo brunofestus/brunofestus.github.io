@@ -428,33 +428,45 @@ function drawBase(){
 
 // ── DRAW PARKS ─────────────────────────────────────────────────────────────────
 function drawParks(){
+  const LABEL_POS = {
+    'Serengeti NP':              [34.55, -2.50],
+    'Maasai Mara NR':            [35.12, -1.50],
+    'Maasai Mara Conservancies': [35.55, -1.25],
+    'Ngorongoro CA':             [35.55, -3.05],
+    'Loiondo GCA':               [35.72, -2.25],
+    'Maswa GR':                  [34.42, -3.05],
+    'Grumeti GR':                [34.18, -2.08],
+    'Ikona WMA':                 [34.65, -2.15],
+    'Ikorongo GR':               [34.72, -1.98],
+    'Makao WMA':                 [34.72, -3.50],
+    'Kijereshi GR':              [33.95, -2.23],
+  };
   for(const feat of DATA_PA.features){
-    const n=feat.properties.name,prot=feat.properties.Protection;
-    let fc,sc;
-    if(n.includes('NP')){fc='rgba(70,120,45,.16)';sc='rgba(60,110,35,.55)';}
-    else if(n.includes('Mara')){fc='rgba(60,110,40,.14)';sc='rgba(55,100,30,.5)';}
-    else if(n.includes('GCA')||n.includes('Loiondo')){fc='rgba(60,100,40,.09)';sc='rgba(50,90,30,.28)';}
-    else{fc='rgba(65,110,45,.12)';sc='rgba(55,100,35,.4)';}
-
+    const n=feat.properties.name;
     const geom=feat.geometry;
     const polys=geom.type==='Polygon'?[geom.coordinates]:geom.coordinates;
     for(const poly of polys){
       for(const ring of poly){
         ctx.beginPath();
         ring.forEach(([lo,la],i)=>i===0?ctx.moveTo(lx(lo),ly(la)):ctx.lineTo(lx(lo),ly(la)));
-        ctx.closePath();ctx.fillStyle=fc;ctx.fill();ctx.strokeStyle=sc;ctx.lineWidth=.7;ctx.stroke();
+        ctx.closePath();
+        ctx.fillStyle='rgba(0,0,0,0)';
+        ctx.fill();
+        ctx.strokeStyle='rgba(22,163,74,0.8)';
+        ctx.lineWidth=1.2;
+        ctx.stroke();
       }
     }
-    // Name label for bigger areas
+    // Name label using manual positions
     const r0=polys[0][0];
-    const cx2=r0.reduce((s,[x])=>s+x,0)/r0.length;
-    const cy2=r0.reduce((s,[,y])=>s+y,0)/r0.length;
-    const px=lx(cx2),py=ly(cy2);
     const w=Math.abs(lx(Math.max(...r0.map(([x])=>x)))-lx(Math.min(...r0.map(([x])=>x))));
-    if(w>40){
-      ctx.font='500 8.5px "DM Mono"';
-      ctx.fillStyle='rgba(50,90,30,.65)';
-      ctx.textAlign='center';ctx.fillText(n,px,py);ctx.textAlign='left';
+    if(w>30){
+      let cx2,cy2;
+      if(LABEL_POS[n]){cx2=LABEL_POS[n][0];cy2=LABEL_POS[n][1];}
+      else{cx2=r0.reduce((s,[x])=>s+x,0)/r0.length;cy2=r0.reduce((s,[,y])=>s+y,0)/r0.length;}
+      ctx.font='italic 600 9px "DM Sans"';
+      ctx.fillStyle='rgba(0,0,0,0.8)';
+      ctx.textAlign='center';ctx.fillText(n,lx(cx2),ly(cy2));ctx.textAlign='left';
     }
   }
 }
