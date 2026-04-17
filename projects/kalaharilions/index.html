@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>African Lions of the Central Kalahari — Festus Bett</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#16A34A; --green-d:#15803D; --green-l:#DCFCE7;
+    --navy:#0D1B2A; --body:#374151; --muted:#6B7280; --dim:#9CA3AF;
+    --bg:#F9FAFB; --white:#FFFFFF; --border:rgba(0,0,0,.08);
+    --shadow:0 2px 12px rgba(0,0,0,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);line-height:1.7}
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.75rem 2rem;display:flex;justify-content:space-between;align-items:center}
+  .nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+  .logo-av{width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid rgba(22,163,74,.4);flex-shrink:0}
+  .logo-av img{width:100%;height:100%;object-fit:cover}
+  .nav-logo-name{font-weight:600;font-size:15px;color:#111827;white-space:nowrap}
+  .nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s}
+  .nav-links a:hover{color:var(--green)}
+  .nav-btn{background:var(--green);color:#fff !important;padding:.4rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600}
+  .nav-btn:hover{background:var(--green-d) !important}
+  .hero{max-width:780px;margin:4rem auto 0;padding:0 2rem}
+  .hero-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap}
+  .tag{background:var(--green-l);color:var(--green);padding:.25rem .8rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .tag.amber{background:#FFFBEB;color:#92400E}
+  .tag.blue{background:#EFF6FF;color:#1D4ED8}
+  .hero-date{font-size:.8rem;color:var(--dim);font-family:'DM Mono',monospace}
+  h1.hero-title{font-family:'Lora',serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;line-height:1.25;color:var(--navy);margin-bottom:1.1rem}
+  h1.hero-title em{color:var(--green);font-style:normal}
+  .hero-sub{font-size:1.05rem;color:var(--body);max-width:640px;line-height:1.8;margin-bottom:1.5rem}
+  .hero-byline{display:flex;align-items:center;gap:.75rem;padding:1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:2.5rem}
+  .avatar{width:38px;height:38px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid rgba(22,163,74,.4)}
+  .avatar img{width:100%;height:100%;object-fit:cover}
+  .byline-text{font-size:.82rem}
+  .byline-name{font-weight:600;color:var(--navy)}
+  .byline-role{color:var(--muted)}
+  article{max-width:780px;margin:0 auto;padding:0 2rem 4rem}
+  p{margin-bottom:1.1rem;font-size:.97rem;color:var(--body);line-height:1.8}
+  strong{color:var(--navy);font-weight:600}
+  .map-preview{background:var(--navy);border-radius:16px;padding:2rem;margin:2rem 0;position:relative;overflow:hidden}
+  .map-preview::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2322C55E' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+  .map-preview-inner{position:relative;z-index:1}
+  .map-preview h3{color:#fff;margin:0 0 .5rem;font-size:1.1rem;font-family:'DM Sans',sans-serif}
+  .map-preview p{color:rgba(255,255,255,.65);font-size:.85rem;margin-bottom:1.25rem}
+  .map-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;padding:.6rem 1.25rem;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600;transition:background .2s}
+  .map-btn:hover{background:var(--green-d)}
+  footer{background:var(--navy);color:rgba(255,255,255,.6);text-align:center;padding:2rem;font-size:.8rem}
+  footer a{color:#22C55E;text-decoration:none}
+  @media(max-width:600px){.nav-links li:not(:last-child){display:none}.hero{margin-top:2rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://festusbett.com/#projects" class="nav-logo">
+    <div class="logo-av"><img src="data:image/jpeg;base64,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" alt="Festus Bett"/></div>
+    <span class="nav-logo-name">Festus Bett</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://festusbett.com/#projects">Projects</a></li>
+    <li><a href="https://festusbett.com/#about">About</a></li>
+    <li><a href="https://festusbett.com/#contact" class="nav-btn">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <h1 class="hero-title">The African Lions of <em>Central Kalahari</em> Botswana</h1>
+  </div>
+</div>
+</div>
+
+<article>
+  <p>Using GPS fixes data from 13 collared African lions in the Central Kalahari Reserve, Botswana I aim to explore behavioural patterns such as resting, travelling, and searching/hunting within their home ranges, identify probable sites where they rest or hunt and how this is dependent on the sex of the lion, time of day and temperature. Early results using step distances and time between fixes, suggest that lions do not use their space uniformly, but instead concentrate activity in specific areas that may reflect feeding or resting sites. This is still a work in progress and I keep refining methods and interpretations, but here is an interactive map (of 6 lions) to play with as you wait.. Enjoy</p>
+
+  <a href="https://kalaharilions.netlify.app/" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;padding:.6rem 1.25rem;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600;margin:1.75rem 0;">Open Interactive Map →</a>
+</article>
+
+
+
+</body>
+</html>
