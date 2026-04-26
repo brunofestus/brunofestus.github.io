@@ -73,10 +73,17 @@
 
 
   .org-links{max-width:780px;margin:3rem auto 0;padding:0 2rem 4rem;text-align:center}
-  .org-links-title{font-weight:600;color:var(--navy);margin-bottom:2rem;font-size:clamp(.85rem,2.5vw,1rem);line-height:1.5;white-space:normal}
-  .org-logo-grid{display:flex;justify-content:center;align-items:flex-start;gap:1.2rem;flex-wrap:wrap;}
-  .org-logo-link{text-decoration:none;display:inline-flex;flex-direction:column;align-items:center;gap:.5rem;color:#000;font-weight:600;font-size:.8rem;width:clamp(75px,18vw,110px);text-align:center;line-height:1.45}
-  .org-logo{width:clamp(75px,18vw,110px);height:clamp(75px,18vw,110px);border-radius:50%;object-fit:contain;background:white;padding:10px;display:block;border:1px solid var(--border);box-shadow:var(--shadow)}
+  .org-links-title{font-weight:600;color:var(--navy);margin-bottom:2.5rem}
+  .org-logo-grid{display:flex;justify-content:center;align-items:flex-start;gap:1.2rem;flex-wrap:nowrap;}
+  .org-logo-link{text-decoration:none;display:inline-flex;flex-direction:column;align-items:center;gap:.5rem;color:#000;font-weight:600;font-size:.8rem;width:110px;text-align:center;line-height:1.45}
+  .org-logo{width:110px;height:110px;border-radius:50%;object-fit:contain;background:white;padding:12px;display:block;border:1px solid var(--border);box-shadow:var(--shadow)}
+
+  @media(max-width:480px){
+    .org-links-title{font-size:.85rem;line-height:1.5;white-space:normal;margin-bottom:1.5rem}
+    .org-logo-grid{flex-wrap:wrap;gap:1rem}
+    .org-logo-link{width:75px;font-size:.72rem}
+    .org-logo{width:75px;height:75px;padding:8px}
+  }
 
   @media(max-width:600px){
     .hero{margin-top:2rem}
@@ -88,7 +95,7 @@
 <div id="progress"></div>
 
 <nav>
-  <a href="https://festusbett.com" class="nav-brand">Check out my <span>other projects</span></a>
+  <a href="https://festusbett.com" class="nav-brand">View my <span>other projects</span></a>
 </nav>
 
 <div class="hero">
@@ -170,7 +177,7 @@ His life exemplified the long-term outcome of coexistence with local communities
 
 </article>
 <section class="org-links">
-<p class="org-links-title">
+<p class="org-links-title" style="white-space:nowrap;">
   Some of the Major Organisations referenced on the full report who are working on HEC and Conservation in Kenya
 </p>
 
