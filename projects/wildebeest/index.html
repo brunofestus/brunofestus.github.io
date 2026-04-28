@@ -50,10 +50,10 @@
   /* ARTICLE */
   article{max-width:780px;margin:0 auto;padding:0 2rem 4rem}
   h2{font-family:'Lora',serif;font-size:1.45rem;font-weight:700;color:var(--navy);margin:2.5rem 0 .75rem;line-height:1.35}
-  p{margin-bottom:1.1rem;font-size:.97rem;color:var(--body);line-height:1.8}
+  p{margin-bottom:1.1rem;font-size:.97rem;color:var(--body);line-height:1.8;text-align:justify}
   strong{color:var(--navy);font-weight:600}
   ol{margin:1rem 0 1.1rem 1.5rem}
-  ol li{font-size:.97rem;color:var(--body);line-height:1.8;margin-bottom:.6rem}
+  ol li{font-size:.97rem;color:var(--body);line-height:1.8;margin-bottom:.6rem;text-align:justify}
 
   /* PULLQUOTE */
   blockquote{border-left:3px solid var(--green);padding:.75rem 1.25rem;margin:1.75rem 0;background:var(--green-dim);border-radius:0 8px 8px 0}
@@ -78,11 +78,11 @@
   .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.75rem 0}
 
   /* MAP PREVIEW */
-  .map-preview{background:var(--navy);border-radius:16px;padding:2rem;margin:2rem 0;position:relative;overflow:hidden}
-  .map-preview::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2322C55E' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+  .map-preview{background:#abdbe3;border-radius:16px;padding:2rem;margin:2rem 0;position:relative;overflow:hidden}
+  .map-preview::before{content:none}
   .map-preview-inner{position:relative;z-index:1}
-  .map-preview h3{color:#fff;margin:0 0 .5rem;font-size:1.1rem;font-family:'DM Sans',sans-serif}
-  .map-preview p{color:rgba(255,255,255,.65);font-size:.85rem;margin-bottom:1.25rem}
+  .map-preview h3{color:var(--navy);margin:0 0 .5rem;font-size:1.1rem;font-family:'DM Sans',sans-serif}
+  .map-preview p{color:rgba(13,27,42,.65);font-size:.85rem;margin-bottom:1.25rem}
   .map-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;padding:.6rem 1.25rem;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600;transition:background .2s}
   .map-btn:hover{background:#15803D}
 
@@ -92,7 +92,7 @@
   .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 
   /* FOOTER */
-  footer{background:var(--navy);color:rgba(255,255,255,.6);text-align:center;padding:2rem;font-size:.8rem}
+  footer{background:#abdbe3;color:var(--navy);text-align:center;padding:2rem;font-size:.8rem}
   footer a{color:var(--green-l);text-decoration:none}
 
   @media(max-width:600px){
@@ -145,7 +145,7 @@
     </div>
     <div class="stat-card">
       <div class="stat-label">Residual SOC in Grazed Areas vs in Ungrazed Areas</div>
-      <div class="stat-num"><span>+2.16</span> <span style="font-size:1.1rem;color:#0D1B2A;font-weight:700">vs</span> <span style="color:#6B7280">−3.14</span></div>
+      <div class="stat-num"><span>2.16</span> <span style="font-size:1.1rem;color:#0D1B2A;font-weight:700">vs</span> <span style="color:#6B7280">−3.14</span></div>
       <div class="stat-sub">Mean tonnes of C/ha</div>
     </div>
   </div>
@@ -201,7 +201,7 @@
 
   <div class="chart-wrap">
     <div class="chart-title">Vegetation Analysis: Protected Area vs Area Beyond Protected Area</div>
-    <div class="chart-desc">The protected area showed a greater seasonal NDVI change (Δ+0.066 units), about 4.5 times more than the surrounding unprotected area (Δ+0.015), suggesting that migratory wildebeest grazing amplifies vegetation responsiveness to rainfall within the protected ecosystem.</div>
+    <div class="chart-desc">The protected area showed a greater seasonal NDVI change (Δ0.066 units), about 4.5 times more than the surrounding unprotected area (Δ0.015), suggesting that migratory wildebeest grazing amplifies vegetation responsiveness to rainfall within the protected ecosystem.</div>
     <div class="chart-canvas">
       <canvas id="c-pa"></canvas>
     </div>
@@ -223,7 +223,7 @@
 
   <div class="chart-wrap">
     <div class="chart-title">Mean Residual SOC in Grazed areas vs in Ungrazed areas (t C/ha)</div>
-    <div class="chart-desc">After controlling for the confounding effect of elevation via OLS regression, grazed areas showed a mean residual SOC of +2.16 t C/ha, while ungrazed areas averaged −3.14 t C/ha.</div>
+    <div class="chart-desc">After controlling for the confounding effect of elevation via OLS regression, grazed areas showed a mean residual SOC of 2.16 t C/ha, while ungrazed areas averaged −3.14 t C/ha.</div>
     <div class="chart-canvas" style="height:220px">
       <canvas id="c-resid"></canvas>
     </div>
@@ -392,7 +392,7 @@ new Chart(document.getElementById('c-resid'), {
   },
   options:{responsive:true, maintainAspectRatio:false,
     plugins:{legend:{display:false},
-             tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y>0?'+':''}${ctx.parsed.y} t C/ha`}}},
+             tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y} t C/ha`}}},
     scales:{
       y:{suggestedMin:-4,suggestedMax:3,ticks:{color:'#6B7280'},grid:{color:'rgba(0,0,0,.05)'}},
       x:{ticks:{color:'#0D1B2A',font:{size:13}},grid:{display:false}}
