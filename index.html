@@ -84,15 +84,22 @@
     /* ── HERO ── */
     /* section: relative min-h-screen flex flex-col items-center justify-center px-8 pt-32 pb-20 */
     #hero{
-      position:relative;
-      min-height:calc(100vh - var(--nav-h));
-      display:flex;flex-direction:column;
-      align-items:center;justify-content:center;
-      padding:128px 32px 80px;
-      background:#ffffff !important;
-      text-align:center;overflow:hidden;
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:100px 32px 80px;
+  background:#ffffff;
+  text-align:center;
+  overflow:hidden;
+}
+    #hero::before{
+      content:'';position:absolute;inset:0;
+      background:none;
+      pointer-events:none;
     }
-    #hero::before{background:none !important;}
     /* div: relative z-10 text-center max-w-5xl */
     .hero-inner{position:relative;z-index:10;max-width:1024px;width:100%;text-align:center;animation:fadeUp .6s ease both}
     @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -192,7 +199,18 @@
     @media(max-width:960px){.projects-grid{grid-template-columns:1fr 1fr}.projects-grid .project-card:nth-child(4){grid-column:auto}}
     @media(max-width:600px){
       nav{padding:0 16px}
-      #hero{padding:96px 20px 72px}
+      #hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:100px 32px 80px;
+  background:#ffffff;
+  text-align:center;
+  overflow:hidden;
+}
       #projects,#about,#contact{padding:64px 20px}
       footer{padding:20px}
       .projects-grid{grid-template-columns:1fr}
@@ -201,7 +219,98 @@
       .footer-inner{flex-direction:column;gap:6px;text-align:center}
       .hero-h1{font-size:clamp(40px,12vw,60px)}
     }
-  @media(max-width:768px){#hero{padding-top:20px!important;}.nav-inner{gap:4px;}.nav-links{gap:12px;}.nav-logo-name{font-size:13px;}}
+  @media(max-width:768px){#hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:100px 32px 80px;
+  background:#ffffff;
+  text-align:center;
+  overflow:hidden;
+}.nav-inner{gap:4px;}.nav-links{gap:12px;}.nav-logo-name{font-size:13px;}}
+html{scroll-padding-top:64px;}
+
+/* ── SCROLL INDICATOR POSITION FIX ── */
+.hero-scroll{
+  bottom:72px !important;
+}
+
+@media(max-width:768px){
+  .hero-scroll{
+    bottom:46px !important;
+  }
+}
+
+
+/* ── HERO SPACING REFINEMENT ── */
+.hero-h1{
+  line-height:1.15;
+}
+
+.hero-h1 .green{
+  margin-top:10px;
+  display:block;
+}
+
+.hero-tags{
+  margin-top:18px;
+  margin-bottom:26px;
+  line-height:1.6;
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.hero-cta{
+  margin-top:10px;
+}
+
+
+/* ── HERO TAGS ONE-LINE (DESKTOP) ── */
+@media(min-width:769px){
+  .hero-tags{
+    white-space:nowrap;
+    overflow:visible;
+    text-overflow:clip;
+    font-size:18px;
+  }
+}
+@media(max-width:768px){
+  .hero-tags{
+    white-space:normal;
+  }
+}
+
+
+/* ── HERO TAGS ALIGNMENT FIX ── */
+.hero-tags{
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
+@media(min-width:1200px){
+  .hero-tags{
+    max-width:800px;
+  }
+}
+
+
+/* ── SCROLL INDICATOR ADJUSTMENT ── */
+.hero-scroll{
+  bottom:80px !important;
+}
+
+@media(max-width:768px){
+  .hero-scroll{
+    bottom:60px !important;
+  }
+}
+
 </style>
 </head>
 <body>
