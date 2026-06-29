@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Festus Bett</title>
+<style>
+  :root{
+      --green-600:#16a34a;
+      --green-700:#15803d;
+      --green-500-30:rgba(34,197,94,.3);
+      --gray-900:#111827;
+      --gray-600:#4b5563;
+      --gray-500:#6b7280;
+      --gray-100:#f3f4f6;
+      --border:#e5e7eb;
+      --bg:#ffffff;
+      --bg-hero:#ffffff;
+      --nav-h:64px;
+      --f:'Inter',system-ui,sans-serif;
+    }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#111827;min-height:100vh;}
+
+  /* NAV */
+  :root{--navy:#0D1B2A;--green:#16A34A;--green-dim:#DCFCE7;--border:rgba(0,0,0,.08);}
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.75rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .nav-brand{font-family:'Lora',serif;font-weight:700;color:var(--navy);font-size:1.05rem;}
+  .nav-brand span{color:var(--green);}
+
+  /* PAGE */
+  .page{padding:56px 32px 80px;max-width:900px;}
+
+  h1{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.02em;color:#111827;margin-bottom:40px;}
+
+  /* MAP BUTTONS — exactly like btn-hero-outline */
+  .map-btn{
+    display:block;width:100%;
+    padding:11px 24px;background:#fff;color:#111827;
+    font-size:16px;font-weight:600;border-radius:8px;
+    border:1.5px solid #e5e7eb;
+    cursor:pointer;text-decoration:none;transition:all .15s;
+    margin-bottom:12px;text-align:left;
+  }
+  .map-btn:hover{border-color:#9ca3af;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+
+  /* LIGHTBOX */
+  .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:1000;align-items:center;justify-content:center;padding:24px;}
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:90vw;max-height:88vh;border-radius:10px;object-fit:contain;}
+  .lb-close{position:absolute;top:20px;right:24px;color:#fff;font-size:36px;cursor:pointer;background:none;border:none;opacity:.75;transition:opacity .15s;}
+  .lb-close:hover{opacity:1;}
+  .lb-caption{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:14px;background:rgba(0,0,0,.5);padding:8px 20px;border-radius:8px;white-space:nowrap;}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:32px;cursor:pointer;background:rgba(255,255,255,.12);border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+  .lb-nav:hover{background:rgba(255,255,255,.28);}
+  .lb-prev{left:16px;} .lb-next{right:16px;}
+  .lb-counter{position:absolute;top:20px;left:50%;transform:translateX(-50%);color:#fff;font-size:13px;opacity:.7;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand" style="text-decoration:none;">Check my <span>projects</span></a>
+</nav>
+
+<div class="page">
+  <h1>Wildebeest Migration in the Maasai Mara–Serengeti</h1>
+  <p style="color:#4b5563;font-size:15px;margin-bottom:32px;line-height:1.6;">Seasonal grazing period maps tracking the annual movement of wildebeest across the Maasai Mara–Serengeti ecosystem.</p>
+
+  <button class="map-btn" onclick="openLb(0)">January–March Grazing Period</button>
+  <button class="map-btn" onclick="openLb(1)">April–May Grazing Period</button>
+  <button class="map-btn" onclick="openLb(2)">June–July Grazing Period</button>
+  <button class="map-btn" onclick="openLb(3)">August–October Grazing Period</button>
+  <button class="map-btn" onclick="openLb(4)">November–December Grazing Period</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLb()">&times;</button>
+  <div class="lb-counter" id="lbCounter"></div>
+  <button class="lb-nav lb-prev" onclick="nav(-1)">&#8249;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" onclick="nav(1)">&#8250;</button>
+  <div class="lb-caption" id="lbCaption"></div>
+</div>
+
+<script>
+  const maps = [
+    { src: 'projects/Gallery/JanMar.jpg',   caption: 'January–March Grazing Period' },
+    { src: 'projects/Gallery/AprilMay.jpg', caption: 'April–May Grazing Period' },
+    { src: 'projects/Gallery/JunJuly.jpg',  caption: 'June–July Grazing Period' },
+    { src: 'projects/Gallery/AugOct.jpg',   caption: 'August–October Grazing Period' },
+    { src: 'projects/Gallery/NovDec.jpg',   caption: 'November–December Grazing Period' },
+  ];
+  let current = 0;
+  function openLb(i) { current = i; show(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeLb() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
+  function nav(dir) { current = (current + dir + maps.length) % maps.length; show(); }
+  function show() {
+    document.getElementById('lbImg').src = maps[current].src;
+    document.getElementById('lbCaption').textContent = maps[current].caption;
+    document.getElementById('lbCounter').textContent = (current + 1) + ' / ' + maps.length;
+  }
+  document.getElementById('lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') nav(-1);
+    if (e.key === 'ArrowRight') nav(1);
+  });
+</script>
+</body>
+</html>
