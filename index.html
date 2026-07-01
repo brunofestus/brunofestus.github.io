@@ -284,7 +284,6 @@
     <div class="hero-cta" style="margin-top:32px;">
       <a href="#projects" class="btn-hero-primary">View My Work </a>
       <a href="#contact" class="btn-hero-outline">Get in Touch</a>
-      <a href="projects/Gallery/" class="btn-hero-outline">Gallery</a>
     </div>
   </div>
   <div class="hero-scroll"><div class="scroll-mouse"></div></div>
@@ -391,5 +390,11 @@
   </div>
 </footer>
 
+<script>
+  window.addEventListener('load', function() {
+    document.getElementById('hero').scrollIntoView();
+    history.replaceState(null, '', '/');
+  });
+</script>
 </body>
 </html>
