@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drones, Tiny Insects and the Community Against Opuntia Engelmannii Cactus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green:#16A34A; --green-l:#22C55E; --green-dim:#DCFCE7;
+    --navy:#0D1B2A; --body:#374151; --muted:#6B7280; --dim:#9CA3AF;
+    --bg:#F9FAFB; --white:#FFFFFF; --border:rgba(0,0,0,.08);
+    --shadow:0 2px 12px rgba(0,0,0,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--body);line-height:1.7}
+
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--green);width:0%;z-index:200;transition:width .1s linear}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.75rem 2rem;display:flex;justify-content:space-between;align-items:center}
+  .nav-brand{font-family:'Lora',serif;font-weight:700;color:var(--navy);font-size:1.05rem;text-decoration:none}
+  .nav-brand span{color:var(--green)}
+
+  .hero{max-width:780px;margin:4rem auto 0;padding:0 2rem}
+  .hero-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap}
+  .tag{background:var(--green-dim);color:var(--green);padding:.25rem .8rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .hero-date{font-size:.8rem;color:var(--dim);font-family:'DM Mono',monospace}
+  h1.hero-title{font-family:'Lora',serif;font-size:clamp(1.5rem,3.1vw,2.2rem);font-weight:700;line-height:1.25;color:var(--navy);margin-bottom:1.1rem;text-align:left}
+  h1.hero-title em{color:var(--green);font-style:normal}
+  .hero-sub{font-size:1.05rem;color:var(--body);max-width:640px;line-height:1.8;margin-bottom:1.5rem}
+  .hero-byline{display:flex;align-items:center;gap:.75rem;padding:1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:2.5rem}
+  .avatar{width:38px;height:38px;border-radius:50%;background:var(--green);display:grid;place-items:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0}
+  .byline-text{font-size:.82rem}
+  .byline-name{font-weight:600;color:var(--navy)}
+  .byline-role{color:var(--muted)}
+
+  article{max-width:780px;margin:0 auto;padding:0 2rem 4rem}
+  h2{font-family:'Lora',serif;font-size:1.45rem;font-weight:700;color:var(--navy);margin:2.5rem 0 .75rem;line-height:1.35}
+  h3{font-family:'Lora',serif;font-size:1.15rem;font-weight:600;color:var(--navy);margin:2rem 0 .6rem;line-height:1.35}
+  p{margin-bottom:1.1rem;font-size:.97rem;color:var(--body);line-height:1.8;text-align:justify}
+  strong{color:var(--navy);font-weight:600}
+
+  blockquote{border-left:3px solid var(--green);padding:.75rem 1.25rem;margin:1.75rem 0;background:var(--green-dim);border-radius:0 8px 8px 0}
+  blockquote p{color:#166534;font-style:italic;font-family:'Lora',serif;font-size:1rem;margin:0;text-align:left}
+
+  .article-img{width:100%;border-radius:12px;margin:0 0 28px;object-fit:cover;max-height:420px;display:block;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+  .img-caption{font-size:.78rem;color:var(--muted);text-align:center;margin-top:-20px;margin-bottom:28px;font-family:'DM Mono',monospace}
+
+  .img-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+  .img-pair img{width:100%;height:220px;object-fit:cover;border-radius:12px;display:block;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+
+  footer{background:var(--navy);color:rgba(255,255,255,.6);text-align:center;padding:2rem;font-size:.8rem}
+  footer a{color:var(--green-l);text-decoration:none}
+
+  @media(max-width:600px){
+    .hero{margin-top:2rem}
+    .img-pair{grid-template-columns:1fr}
+  }
+
+  .org-links{max-width:780px;margin:3rem auto 0;padding:0 2rem 4rem;text-align:center}
+  .org-links-title{font-weight:600;color:var(--navy);margin-bottom:2.5rem}
+  .org-logo-grid{display:flex;justify-content:center;align-items:flex-start;gap:.8rem;flex-wrap:nowrap;}
+  .org-logo-link{text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:.5rem;color:#000;font-weight:600;font-size:clamp(.6rem,1.6vw,.8rem);flex:1 1 0;min-width:0;max-width:110px;text-align:center;line-height:1.35}
+  .org-logo{width:100%;aspect-ratio:1/1;max-width:110px;border-radius:50%;object-fit:contain;background:white;padding:12px;display:block;border:1px solid var(--border);box-shadow:var(--shadow)}
+
+  @media(max-width:480px){
+    .org-links-title{font-size:.85rem;line-height:1.5;margin-bottom:1.5rem}
+    .org-logo-grid{gap:.4rem}
+    .org-logo{padding:8px}
+  }
+
+  .article-img.zoomable{cursor:zoom-in;transition:opacity .15s}
+  .article-img.zoomable:hover{opacity:.92}
+  #lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(13,27,42,.92);z-index:300;align-items:center;justify-content:center;cursor:zoom-out;padding:2rem;box-sizing:border-box}
+  #lightbox.active{display:flex}
+  #lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+  #lightbox .lightbox-close{position:absolute;top:1.25rem;right:1.5rem;color:#fff;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;opacity:.8;letter-spacing:.03em}
+</style>
+</head>
+<body>
+<div id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">Close ✕</span>
+  <img id="lightbox-img" src="" alt="Full resolution image">
+</div>
+
+
+<div id="progress"></div>
+
+<nav>
+  <a href="https://festusbett.com" class="nav-brand">View my <span>other projects</span></a>
+</nav>
+
+<div class="hero">
+  <h1 class="hero-title">Drones, Tiny Insects and the Community Against a Prickly Predicament, <em>Opuntia Engelmannii</em>Cactus, in Kenya's Northern Rangelands</h1>
+  <img src="images/grasslands-hero.jpg" class="article-img" alt="Community members carrying harvested Opuntia cactus pads across grassland in Laikipia">
+
+
+</div>
+
+<article>
+
+  <p>Grasslands are among the world's most extensive and ecologically important ecosystems, playing a vital role in supporting livelihoods and biodiversity, conserving soils, regulating water cycles, storing vast amounts of carbon below ground, and offering opportunities for tourism and recreation. However, many of these ecosystems are increasingly under pressure from climate change, land degradation, changing land-use practices, habitat fragmentation, and the spread of invasive species, all of which reduce the ability of grasslands to provide these critical ecosystem services.</p>
+
+  <p>In Kenya, grasslands support millions of people through pastoralism while providing habitat for some of Africa's most iconic wildlife. These landscapes, however, are increasingly facing the combined pressures of recurrent droughts, overgrazing, land-use change, and the spread of invasive plant species that alter ecosystem function and reduce the productivity of native grasslands. In Laikipia County, Kenya, one such invasive species, <strong>Opuntia engelmannii</strong>, a prickly pear cactus native to southwestern USA and northern Mexico, has become a growing ecological challenge, spreading across grazing lands and reducing the availability of pasture for both livestock and wildlife.</p>
+
+  <img src="projects/Gallery/Loisaba%20Naibunga.jpg" class="article-img zoomable" alt="Map of Loisaba and Naibunga Community Conservancies in Northern Kenya, Laikipia County" data-full="projects/Gallery/Loisaba%20Naibunga.jpg" onclick="openLightbox(this)">
+  <p class="img-caption">Loisaba and Naibunga Community Conservancies, Laikipia County — the landscape at the centre of this project.</p>
+
+  <img src="images/naibunga-healthy-grassland.jpg" class="article-img" alt="Grassland in Naibunga Community Conservancy">
+  <p class="img-caption">Part of Naibunga Community Conservancy, where healthy grasslands are increasingly threatened by invasive Opuntia cactus.</p>
+
+  <p>For the pastoralist community in Naibunga and Loisaba Conservancies in Laikipia, the spread of Opuntia cactus is more than an ecological concern, it is a daily challenge. Community members described how stands of the cactus have progressively encroached on productive grazing areas, restricting livestock movement, injuring animals with their sharp spines, and, in some cases, causing livestock deaths after the animals consumed its fruits or pads.</p>
+
+  <p>Beyond its direct impacts on livestock, the spread of Opuntia has altered the structure and function of the ecosystem. As native vegetation gets displaced, biodiversity declines, ecosystem processes get disrupted, and the resilience of the rangeland to drought and other climate-related pressures seemingly reduces. For communities and wildlife whose survival is dependent on healthy grasslands, the degradation caused by the invasive Opuntia represents both an environmental, conservation, and socioeconomic challenge.</p>
+
+  <img src="images/cattle-feeding-opuntia.jpg" class="article-img" alt="Cattle feeding on Opuntia cactus fruits and pads">
+  <p class="img-caption">Cattle seen to be feeding on Opuntia cactus fruits and pads.</p>
+
+  <div class="img-pair">
+    <img src="images/elephants-opuntia.jpg" alt="Elephants near Opuntia cactus in Laikipia">
+    <img src="images/giraffe-opuntia.jpg" alt="Giraffe feeding near Opuntia cactus stands in Laikipia">
+  </div>
+  <p class="img-caption" style="margin-top:-18px;">Wildlife, People and Livestock sharing the same space increasingly encroached on by Opuntia.</p>
+
+  <h2>A Biological Response</h2>
+  <p>Recognizing this challenge, the Centre for Agriculture and Bioscience International (CABI), with support from The Nature Conservancy (TNC) and in collaboration with the local community, implemented a biological control programme using <strong>Dactylopius opuntiae</strong> (cochineal insects). Community members explained how manual removal had become unsustainable and labour-intensive. They described how the cactus continues to spread with or without rain, with detached pads and fruits developing roots wherever they land, some even recounted seeing the cactus growing on top of trees, where it had become lodged. The biological control by CABI offered a sustainable, long-term approach to the problem.</p>
+
+  <p>Following successful use in South Africa, the cochineal insects were introduced into affected areas of Laikipia, where they have since been mass-reared and deployed to suppress the spread of the cactus. The initiative combines scientific research with community participation, allowing the community to take an active role in restoring their lands.</p>
+  <img src="images/grasslands-hero.jpg" class="article-img" alt="Community members carrying harvested Opuntia cactus pads across grassland in Laikipia">
+  <p class="img-caption">Community members collecting pads of Opuntia cactus that will be used to mass rear cochineal insects.</p>
+
+  <img src="images/community-collect-pads.jpg" class="article-img" alt="Community members collecting Opuntia cactus pads for cochineal rearing">
+  <p class="img-caption">Cochineal insects feed exclusively on Opuntia, gradually weakening the cactus.</p>
+  <h2>Mapping the Invasion from Above</h2>
+  <p>Alongside biological control, drones played an important role in supporting the restoration efforts. Using the DJI Mavic 3 Multispectral, we conducted aerial surveys to map the extent of Opuntia invasion and establish a baseline for monitoring over time. The high-resolution imagery provided valuable spatial information on the distribution of the invasive cactus, helping project partners assess affected areas and track the effectiveness of the biological control interventions.</p>
+
+  <img src="images/field-team-community.jpg" class="article-img" alt="Field team with community members in Laikipia">
+  <p class="img-caption">The field team with community members in Naibunga during a mapping and monitoring field visit.</p>
+
+  <img src="images/ndvi-map-community-viewing.jpg" class="article-img" alt="Community members viewing a vegetation index map derived from drone imagery">
+  <p class="img-caption">Community members viewing a vegetation index map derived from drone imagery, showing the spread of Opuntia cactus.</p>
+
+  <img src="images/drone-aerial-cactus-detail.jpg" class="article-img" alt="Aerial drone image showing Opuntia cactus stands from above">
+  <p class="img-caption">An RGB drone showing individual Opuntia stands and surrounding vegetation.</p>
+
+  <img src="images/drone-demo-community.jpg" class="article-img" alt="Drone being demonstrated to community members in Laikipia">
+
+
+  <h2>Personal Reflection</h2>
+  <p>Being part of this project reminded me that restoration is about restoring the balance of an ecosystem so that native vegetation, wildlife, livestock, and people can thrive together . Healthy grasslands/rangelands not only provide food and habitat but also protect soils, store carbon. As climate change and other pressures continue to reshape our landscapes, protecting and restoring ecosystems like these reminds us that nature's resilience is also our own and one of our strongest allies in our fight against climate change.</p>
+
+  <p style="font-style:italic;">Read the original write up by CABI here:</p>
+  <p>
+  <a href="https://blog.invasive-species.org/2024/03/26/drones-insects-and-local-community-to-tackle-kenyas-thorny-problem/"
+     target="_blank"
+     style="color: var(--green); font-weight: 600; text-decoration: none;">
+    Drones, insects and local community tackle Kenya's thorny problem
+  </a>
+  </p>
+
+</article>
+
+<section class="org-links">
+  <div class="org-logo-grid">
+    <a href="https://www.nrt-kenya.org/" target="_blank" rel="noopener" class="org-logo-link">
+      <img src="images/logo-nrt.png" alt="Northern Rangelands Trust" class="org-logo">
+      <span>Northern Rangelands Trust</span>
+    </a>
+    <a href="https://www.cabi.org/" target="_blank" rel="noopener" class="org-logo-link">
+      <img src="images/logo-cabi.png" alt="CABI" class="org-logo">
+      <span>CABI</span>
+    </a>
+    <a href="https://www.laikipia.go.ke/" target="_blank" rel="noopener" class="org-logo-link">
+      <img src="images/logo-laikipia-county.png" alt="County Government of Laikipia" class="org-logo">
+      <span>Laikipia County</span>
+    </a>
+    <a href="https://www.nrt-kenya.org/naibunga" target="_blank" rel="noopener" class="org-logo-link">
+      <img src="images/logo-naibunga-central.png" alt="Naibunga Central Conservancy Trust" class="org-logo" style="padding:0;">
+      <span>Naibunga Central Conservancy</span>
+    </a>
+    <a href="https://www.nrt-kenya.org/naibunga" target="_blank" rel="noopener" class="org-logo-link">
+      <img src="images/logo-naibunga-upper.png" alt="Naibunga Upper Conservancy Trust" class="org-logo" style="padding:0;">
+      <span>Naibunga Upper Conservancy</span>
+    </a>
+    <a href="https://www.nrt-kenya.org/naibunga" target="_blank" rel="noopener" class="org-logo-link">
+      <img src="images/logo-naibunga-lower.png" alt="Naibunga Lower Conservancy Trust" class="org-logo" style="padding:0;">
+      <span>Naibunga Lower Conservancy</span>
+    </a>
+    <a href="https://www.loisaba.com/" target="_blank" rel="noopener" class="org-logo-link">
+      <img src="images/logo-loisaba.png" alt="Loisaba Conservancy" class="org-logo">
+      <span>Loisaba Conservancy</span>
+    </a>
+  </div>
+</section>
+
+
+<script>
+  function openLightbox(el){
+    document.getElementById('lightbox-img').src = el.getAttribute('data-full');
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  const bar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>
