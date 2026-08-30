@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery . Festus Bett</title>
   <meta name="description" content="Maps, illustrations, and infographics from Festus Bett's conservation and GIS work." />
-  <style>
-    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2')}
-    @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2')}
-    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
+  <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --green-600:#16a34a;
@@ -17,10 +17,9 @@
       --gray-900:#111827;
       --gray-600:#4b5563;
       --gray-500:#6b7280;
-      --border:#e5e7eb;
       --nav-h:64px;
-      --f-heading:'Lora',serif;
-      --f-body:'Inter',system-ui,sans-serif;
+      --f-heading:'Lora', Georgia, 'Times New Roman', serif;
+      --f-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
     }
     html{scroll-behavior:smooth}
     body{
@@ -31,14 +30,9 @@
     }
 
     /* ── NAV ── */
-    nav{
-      position:sticky;top:0;z-index:100;
-      padding:28px 32px 0;
-    }
+    nav{padding:28px 32px 0;}
     .nav-inner{max-width:1200px;margin:0 auto}
-    .back-link{
-      font-size:16px;font-weight:600;color:var(--gray-900);text-decoration:none;
-    }
+    .back-link{font-size:16px;font-weight:600;color:var(--gray-900);text-decoration:none}
     .back-link .accent{color:var(--green-600)}
     .back-link:hover .accent{color:var(--green-700)}
 
@@ -50,7 +44,7 @@
       max-width:900px;
     }
     .gallery-hero h1 .accent{color:var(--green-600)}
-    .gallery-hero p{font-size:17px;color:var(--gray-600);max-width:560px;margin-top:20px}
+    .gallery-hero p{font-family:var(--f-body);font-size:17px;color:var(--gray-600);max-width:560px;margin-top:20px}
 
     /* ── GRID ── */
     .gallery-grid{
@@ -58,8 +52,7 @@
       display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:32px;
     }
     .gallery-card{
-      background:#fff;border-radius:10px;overflow:hidden;
-      text-decoration:none;color:inherit;display:block;
+      background:#fff;border-radius:10px;overflow:hidden;cursor:pointer;
       box-shadow:0 1px 3px rgba(0,0,0,.08);
       transition:transform .2s ease, box-shadow .2s ease;
     }
@@ -67,22 +60,25 @@
     .gallery-card-img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#eee}
     .gallery-card-body{padding:18px 20px 22px}
     .gallery-card-body h3{font-family:var(--f-heading);font-weight:700;font-size:19px;color:var(--gray-900);margin-bottom:4px}
-    .gallery-card-body p{font-size:13px;color:var(--gray-500)}
+    .gallery-card-body p{font-family:var(--f-body);font-size:13px;color:var(--gray-500)}
 
     /* ── LIGHTBOX ── */
     .lightbox{
       display:none;position:fixed;inset:0;z-index:1000;
-      background:rgba(17,24,39,.92);
-      align-items:center;justify-content:center;padding:32px;
+      background:rgba(17,24,39,.94);
+      align-items:center;justify-content:center;padding:40px;
     }
     .lightbox.open{display:flex}
-    .lightbox img{max-width:100%;max-height:88vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+    .lightbox img{
+      max-width:100%;max-height:90vh;width:auto;height:auto;
+      object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5);
+    }
     .lightbox-close{
-      position:absolute;top:24px;right:32px;color:#fff;font-size:32px;
-      background:none;border:none;cursor:pointer;line-height:1;
+      position:fixed;top:20px;right:28px;color:#fff;font-size:36px;
+      background:none;border:none;cursor:pointer;line-height:1;z-index:1001;
     }
 
-    footer{text-align:center;padding:40px 32px;font-size:13px;color:var(--gray-500)}
+    footer{text-align:center;padding:40px 32px;font-family:var(--f-body);font-size:13px;color:var(--gray-500)}
 
     @media(max-width:640px){
       .gallery-hero h1{font-size:36px}
@@ -101,21 +97,21 @@
 <!-- HERO -->
 <section class="gallery-hero">
   <h1>Maps, Illustrations and <span class="accent">Infographics</span></h1>
-  <p>A collection of maps, Infographics and Illustrations from my work.</p>
+  <p>A collection of maps, illustartions and Infrographics from my work.</p>
 </section>
 
 <!-- GRID -->
 <div class="gallery-grid" id="galleryGrid">
 
-  <a href="#" class="gallery-card" data-full="african-savanna-elephant-range-map.jpg">
-    <img class="gallery-card-img" src="AfricanElephant.jpg" alt="African Savanna Elephant Range Map" loading="lazy" />
+  <div class="gallery-card" data-full="african-savanna-elephant-range-map.jpg" data-title="African Savanna Elephant Range Map">
+    <img class="gallery-card-img" src="african-savanna-elephant-range-map.jpg" alt="African Savanna Elephant Range Map" loading="lazy" />
     <div class="gallery-card-body">
       <h3>African Savanna Elephant Range Map</h3>
-      <p> Elephant Ranging and conservation status across sub-Saharan Africa</p>
+      <p> Elephant ranging and conservation status across sub-Saharan Africa</p>
     </div>
-  </a>
+  </div>
 
-  <!-- Add more gallery items by copying the block above and updating the image filename, title, and caption -->
+  <!-- Add more items by copying the block above: update data-full, the img src, the h3, and the p caption -->
 
 </div>
 
@@ -123,28 +119,49 @@
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
   <img id="lightboxImg" src="" alt="" />
 </div>
 
 <script>
-  const grid = document.getElementById('galleryGrid');
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxClose = document.getElementById('lightboxClose');
+  document.addEventListener('DOMContentLoaded', function () {
+    var cards = document.querySelectorAll('.gallery-card');
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+    var lightboxClose = document.getElementById('lightboxClose');
 
-  grid.addEventListener('click', (e) => {
-    const card = e.target.closest('.gallery-card');
-    if (!card) return;
-    e.preventDefault();
-    lightboxImg.src = card.dataset.full;
-    lightboxImg.alt = card.querySelector('h3').textContent;
-    lightbox.classList.add('open');
+    function openLightbox(card) {
+      var full = card.getAttribute('data-full');
+      var title = card.getAttribute('data-title') || '';
+      lightboxImg.src = full;
+      lightboxImg.alt = title;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () { openLightbox(card); });
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(card); }
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
   });
-
-  lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
 </script>
 
 </body>
