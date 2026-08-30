@@ -17,7 +17,6 @@
       --gray-900:#111827;
       --gray-600:#4b5563;
       --gray-500:#6b7280;
-      --nav-h:64px;
       --f-heading:'Lora', Georgia, 'Times New Roman', serif;
       --f-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
     }
@@ -66,22 +65,47 @@
     .lightbox{
       display:none;position:fixed;inset:0;z-index:1000;
       background:rgba(17,24,39,.94);
-      align-items:center;justify-content:center;padding:40px;
     }
-    .lightbox.open{display:flex}
-    .lightbox img{
-      max-width:100%;max-height:90vh;width:auto;height:auto;
-      object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5);
+    .lightbox.open{display:block}
+    .lightbox-stage{
+      position:absolute;inset:0;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+      touch-action:none;
     }
+    .lightbox-stage img{
+      max-width:92vw;max-height:92vh;
+      border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5);
+      user-select:none;-webkit-user-drag:none;
+      cursor:zoom-in;
+      transform-origin:0 0;
+      will-change:transform;
+    }
+    .lightbox-stage img.zoomed{cursor:grab}
+    .lightbox-stage img.dragging{cursor:grabbing}
     .lightbox-close{
       position:fixed;top:20px;right:28px;color:#fff;font-size:36px;
-      background:none;border:none;cursor:pointer;line-height:1;z-index:1001;
+      background:none;border:none;cursor:pointer;line-height:1;z-index:1002;
     }
+    .lightbox-hint{
+      position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+      color:rgba(255,255,255,.6);font-family:var(--f-body);font-size:13px;
+      z-index:1002;pointer-events:none;
+    }
+    .lightbox-zoom-controls{
+      position:fixed;bottom:20px;right:28px;display:flex;gap:8px;z-index:1002;
+    }
+    .lightbox-zoom-controls button{
+      width:36px;height:36px;border-radius:50%;border:none;
+      background:rgba(255,255,255,.12);color:#fff;font-size:18px;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .lightbox-zoom-controls button:hover{background:rgba(255,255,255,.22)}
 
     footer{text-align:center;padding:40px 32px;font-family:var(--f-body);font-size:13px;color:var(--gray-500)}
 
     @media(max-width:640px){
       .gallery-hero h1{font-size:36px}
+      .lightbox-hint{display:none}
     }
   </style>
 </head>
@@ -97,17 +121,16 @@
 <!-- HERO -->
 <section class="gallery-hero">
   <h1>Maps, Illustrations and <span class="accent">Infographics</span></h1>
-  <p>A collection of maps, illustartions and Infrographics from my work.</p>
+  <p>A collection of maps, Infographics and Illustrations from my work.</p>
 </section>
 
 <!-- GRID -->
 <div class="gallery-grid" id="galleryGrid">
 
   <div class="gallery-card" data-full="AfricanElephant.jpg" data-title="African Savanna Elephant Range Map">
-    <img class="gallery-card-img" src="AfricanElephant.jpg" loading="lazy" />
+    <img class="gallery-card-img" src="AfricanElephant.jpg" alt="African Savanna Elephant Range Map" loading="lazy" />
     <div class="gallery-card-body">
-      <h3>African Savanna Elephant Range Map</h3>
-      <p> Elephant ranging and conservation status across sub-Saharan Africa</p>
+      <p>African Elephant ranging and conservation status across sub-Saharan Africa</p>
     </div>
   </div>
 
@@ -115,33 +138,75 @@
 
 </div>
 
-
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
-  <img id="lightboxImg" src="" alt="" />
+  <div class="lightbox-stage" id="lightboxStage">
+    <img id="lightboxImg" src="" alt="" />
+  </div>
+  <div class="lightbox-hint">Scroll or pinch to zoom &middot; drag to pan &middot; double-click to reset</div>
+  <div class="lightbox-zoom-controls">
+    <button id="zoomOutBtn" aria-label="Zoom out">&minus;</button>
+    <button id="zoomInBtn" aria-label="Zoom in">&plus;</button>
+  </div>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var cards = document.querySelectorAll('.gallery-card');
     var lightbox = document.getElementById('lightbox');
-    var lightboxImg = document.getElementById('lightboxImg');
-    var lightboxClose = document.getElementById('lightboxClose');
+    var stage = document.getElementById('lightboxStage');
+    var img = document.getElementById('lightboxImg');
+    var closeBtn = document.getElementById('lightboxClose');
+    var zoomInBtn = document.getElementById('zoomInBtn');
+    var zoomOutBtn = document.getElementById('zoomOutBtn');
+
+    var scale = 1, minScale = 1, maxScale = 5;
+    var tx = 0, ty = 0;
+    var isDragging = false, dragStartX = 0, dragStartY = 0, txStart = 0, tyStart = 0;
+    var pinchStartDist = 0, pinchStartScale = 1;
+
+    function applyTransform() {
+      img.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+      img.classList.toggle('zoomed', scale > 1.01);
+    }
+
+    function clamp(val, lo, hi) { return Math.min(hi, Math.max(lo, val)); }
+
+    function constrain() {
+      var rect = stage.getBoundingClientRect();
+      var iw = img.naturalWidth * (img.clientWidth / img.naturalWidth || 1);
+      // use rendered base size before scale
+      var baseW = img.getBoundingClientRect().width / scale;
+      var baseH = img.getBoundingClientRect().height / scale;
+      var scaledW = baseW * scale;
+      var scaledH = baseH * scale;
+      var maxX = Math.max(0, (scaledW - rect.width) / 2);
+      var maxY = Math.max(0, (scaledH - rect.height) / 2);
+      tx = clamp(tx, -maxX, maxX);
+      ty = clamp(ty, -maxY, maxY);
+    }
+
+    function resetView() {
+      scale = 1; tx = 0; ty = 0;
+      applyTransform();
+    }
 
     function openLightbox(card) {
       var full = card.getAttribute('data-full');
       var title = card.getAttribute('data-title') || '';
-      lightboxImg.src = full;
-      lightboxImg.alt = title;
+      resetView();
+      img.src = full;
+      img.alt = title;
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
       lightbox.classList.remove('open');
-      lightboxImg.src = '';
+      img.src = '';
       document.body.style.overflow = '';
+      resetView();
     }
 
     cards.forEach(function (card) {
@@ -153,12 +218,106 @@
       });
     });
 
-    lightboxClose.addEventListener('click', closeLightbox);
+    closeBtn.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', function (e) {
       if (e.target === lightbox) closeLightbox();
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLightbox();
+    });
+
+    /* Wheel zoom (desktop) */
+    stage.addEventListener('wheel', function (e) {
+      if (!lightbox.classList.contains('open')) return;
+      e.preventDefault();
+      var delta = e.deltaY < 0 ? 0.15 : -0.15;
+      var newScale = clamp(scale + delta, minScale, maxScale);
+      if (newScale === scale) return;
+      scale = newScale;
+      if (scale === 1) { tx = 0; ty = 0; }
+      constrain();
+      applyTransform();
+    }, { passive: false });
+
+    /* Double-click to toggle zoom */
+    img.addEventListener('dblclick', function () {
+      if (scale > 1) {
+        resetView();
+      } else {
+        scale = 2.5;
+        constrain();
+        applyTransform();
+      }
+    });
+
+    /* Mouse drag to pan */
+    img.addEventListener('mousedown', function (e) {
+      if (scale <= 1) return;
+      isDragging = true;
+      img.classList.add('dragging');
+      dragStartX = e.clientX; dragStartY = e.clientY;
+      txStart = tx; tyStart = ty;
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      tx = txStart + (e.clientX - dragStartX);
+      ty = tyStart + (e.clientY - dragStartY);
+      constrain();
+      applyTransform();
+    });
+    window.addEventListener('mouseup', function () {
+      isDragging = false;
+      img.classList.remove('dragging');
+    });
+
+    /* Touch: drag to pan + pinch to zoom */
+    stage.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 1 && scale > 1) {
+        isDragging = true;
+        dragStartX = e.touches[0].clientX;
+        dragStartY = e.touches[0].clientY;
+        txStart = tx; tyStart = ty;
+      } else if (e.touches.length === 2) {
+        isDragging = false;
+        var dx = e.touches[0].clientX - e.touches[1].clientX;
+        var dy = e.touches[0].clientY - e.touches[1].clientY;
+        pinchStartDist = Math.sqrt(dx * dx + dy * dy);
+        pinchStartScale = scale;
+      }
+    }, { passive: true });
+
+    stage.addEventListener('touchmove', function (e) {
+      if (e.touches.length === 1 && isDragging) {
+        tx = txStart + (e.touches[0].clientX - dragStartX);
+        ty = tyStart + (e.touches[0].clientY - dragStartY);
+        constrain();
+        applyTransform();
+      } else if (e.touches.length === 2) {
+        var dx = e.touches[0].clientX - e.touches[1].clientX;
+        var dy = e.touches[0].clientY - e.touches[1].clientY;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        scale = clamp(pinchStartScale * (dist / pinchStartDist), minScale, maxScale);
+        constrain();
+        applyTransform();
+      }
+    }, { passive: true });
+
+    stage.addEventListener('touchend', function () {
+      isDragging = false;
+    });
+
+    /* +/- buttons */
+    zoomInBtn.addEventListener('click', function () {
+      scale = clamp(scale + 0.5, minScale, maxScale);
+      constrain();
+      applyTransform();
+    });
+    zoomOutBtn.addEventListener('click', function () {
+      scale = clamp(scale - 0.5, minScale, maxScale);
+      if (scale === 1) { tx = 0; ty = 0; }
+      constrain();
+      applyTransform();
     });
   });
 </script>
