@@ -234,6 +234,76 @@ footer p{font-family:'Caveat',cursive;font-weight:600;font-size:24px;color:#1118
 .fb-form input:focus,.fb-form textarea:focus,.fb-form input:focus-visible,.fb-form textarea:focus-visible{box-shadow:none !important;outline:none !important;}
 .fb-art{max-width:380px !important;}
 @media(max-width:600px){.fb-art{max-width:300px !important;}}
+
+/* statistical tables */
+.stats-wrap{padding:1.3rem 1.2rem 1rem;}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:.6rem;}
+.tbl{width:100%;border-collapse:collapse;font-size:.82rem;min-width:560px;}
+.tbl th{font-family:'Caveat',cursive;font-weight:600;font-size:20px;color:#1f5fa8;text-align:left;padding:.4rem .6rem;border-bottom:1.5px solid rgba(31,95,168,.25);}
+.tbl td{padding:.55rem .6rem;border-bottom:1px solid rgba(0,0,0,.06);color:#1F2937;vertical-align:top;line-height:1.45;text-align:left;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl td strong{color:#0D1B2A;}
+.tbl-tests td:nth-child(2),.tbl-tests td:nth-child(3),.tbl-reg td:nth-child(3){white-space:nowrap;}
+.tbl{min-width:640px;}
+
+/* statistical tests as note cards */
+.stats-block{margin:1.8rem 0 .6rem;}
+.st-head{margin:0 0 .8rem !important;}
+.st-group{font-family:'Caveat',cursive;font-weight:600;font-size:22px;color:#cf3b2b;margin:1rem 0 .5rem !important;text-align:left !important;}
+.st-grid{display:grid;gap:14px;}
+.st-3{grid-template-columns:repeat(3,1fr);}
+.st-2{grid-template-columns:repeat(2,1fr);}
+.st-card{display:flex;flex-direction:column;gap:2px;padding:1.1rem 1.2rem 1.2rem;background-repeat:no-repeat;background-position:center;background-size:100% 100%;}
+.st-card:nth-child(odd){transform:rotate(-.5deg);} .st-card:nth-child(even){transform:rotate(.5deg);}
+.st-name{font-family:'Caveat',cursive;font-weight:600;font-size:22px;line-height:1.1;color:#1f5fa8;}
+.st-val{font-family:'Lora',serif;font-weight:700;font-size:1.45rem;color:#0D1B2A;line-height:1.25;}
+.st-p{font-family:'Caveat',cursive;font-weight:600;font-size:20px;color:#cf3b2b;}
+.st-p sup{font-size:.7em;}
+.st-eff{color:#8a5a1e;}
+.st-txt{font-size:.86rem;line-height:1.5;color:#374151;margin-top:.35rem;text-align:left;}
+.st-txt b{color:#0D1B2A;font-weight:600;}
+@media(max-width:700px){.st-3,.st-2{grid-template-columns:1fr;}}
+.st-card.w1{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .06' numOctaves='3' seed='3' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='10'/%3E%3C/filter%3E%3Cg filter='url(%23r)'%3E%3Cpath d='M8 6 C90 2 210 4 292 6 C297 50 296 110 293 154 C200 158 100 157 7 154 C3 110 4 50 8 6 Z' fill='%23cfe3bf'/%3E%3C/g%3E%3C/svg%3E");}
+.st-card.w2{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .06' numOctaves='3' seed='8' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='10'/%3E%3C/filter%3E%3Cg filter='url(%23r)'%3E%3Cpath d='M8 6 C90 2 210 4 292 6 C297 50 296 110 293 154 C200 158 100 157 7 154 C3 110 4 50 8 6 Z' fill='%23cfe3bf'/%3E%3C/g%3E%3C/svg%3E");}
+.st-card.w3{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .06' numOctaves='3' seed='12' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='10'/%3E%3C/filter%3E%3Cg filter='url(%23r)'%3E%3Cpath d='M8 6 C90 2 210 4 292 6 C297 50 296 110 293 154 C200 158 100 157 7 154 C3 110 4 50 8 6 Z' fill='%23cfe3bf'/%3E%3C/g%3E%3C/svg%3E");}
+.st-card.w4{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .06' numOctaves='3' seed='4' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='10'/%3E%3C/filter%3E%3Cg filter='url(%23r)'%3E%3Cpath d='M8 6 C90 2 210 4 292 6 C297 50 296 110 293 154 C200 158 100 157 7 154 C3 110 4 50 8 6 Z' fill='%23f0dcaa'/%3E%3C/g%3E%3C/svg%3E");}
+.st-card.w5{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .06' numOctaves='3' seed='9' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='10'/%3E%3C/filter%3E%3Cg filter='url(%23r)'%3E%3Cpath d='M8 6 C90 2 210 4 292 6 C297 50 296 110 293 154 C200 158 100 157 7 154 C3 110 4 50 8 6 Z' fill='%23f0dcaa'/%3E%3C/g%3E%3C/svg%3E");}
+.st-card{padding:1.2rem 1.3rem 1.3rem !important;}
+.stats-block+.chart-callout{margin-top:1.4rem !important;}
+.st-head,.st-group{text-align:left !important;}
+
+.st-q{font-size:.78rem;line-height:1.4;color:#6B7280;font-style:italic;margin:.1rem 0 .45rem;text-align:left;}
+.st-rows{display:flex;flex-direction:column;gap:3px;margin:.1rem 0 .1rem;}
+.st-row{display:flex;justify-content:space-between;gap:10px;font-size:.84rem;color:#374151;border-bottom:1px dashed rgba(17,24,39,.15);padding:2px 0;}
+.st-row b{font-family:'Lora',serif;font-weight:700;color:#0D1B2A;white-space:nowrap;}
+.reg-block .st-val{font-size:1.25rem;}
+.st-card.w6{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .06' numOctaves='3' seed='4' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='10'/%3E%3C/filter%3E%3Cg filter='url(%23r)'%3E%3Cpath d='M8 6 C90 2 210 4 292 6 C297 50 296 110 293 154 C200 158 100 157 7 154 C3 110 4 50 8 6 Z' fill='%23f0dcaa'/%3E%3C/g%3E%3C/svg%3E");}
+.stats-block:not(.reg-block) .st-head{color:#1f5fa8 !important;}
+
+.stats-block{position:relative;}
+.st-hint{font-size:.9rem;line-height:1.6;color:#374151;margin:.2rem 0 .4rem !important;padding:.7rem 1rem;border:1.5px dashed rgba(31,95,168,.45);border-radius:10px;text-align:left !important;}
+.st-hint b{color:#0D1B2A;font-weight:600;}
+.hint-tag{font-family:'Caveat',cursive;font-weight:600;font-size:21px;color:#1f5fa8;margin-right:.25rem;}
+.st-side{margin-top:1.4rem !important;}
+@media(min-width:1280px){
+  .st-side{position:absolute;left:calc(100% + 40px);top:50%;width:240px;margin:0 !important;font-size:22px !important;transform:translateY(-50%) rotate(2deg);}
+  .st-side .cc-arrow{left:-34px;top:-24px;width:44px;height:26px;transform:rotate(15deg) scaleX(-1) !important;}
+}
+
+/* residual SOC hint beside chart */
+.resid-wrap{position:relative;}
+.resid-hint{padding:.8rem 1rem;border:1.5px dashed rgba(31,95,168,.45);border-radius:10px;margin:1.2rem 0 .4rem;}
+.resid-hint .hint-tag{display:block;font-family:'Caveat',cursive;font-weight:600;font-size:22px;color:#1f5fa8;margin-bottom:.3rem;}
+.resid-hint p{font-size:.88rem;line-height:1.6;color:#374151;margin:0 0 .5rem !important;text-align:left !important;}
+.resid-hint b{color:#0D1B2A;font-weight:600;}
+.resid-hint .formula{font-family:'Lora',serif;font-style:italic;font-weight:600;font-size:.95rem;color:#0D1B2A;background:rgba(31,95,168,.07);padding:.45rem .6rem;border-radius:6px;margin:0 !important;text-align:center !important;}
+.resid-hint .formula sub{font-size:.72em;font-style:normal;}
+@media(min-width:1280px){
+  .resid-hint{position:absolute;left:calc(100% + 36px);top:50%;transform:translateY(-50%) rotate(1deg);width:270px;margin:0;}
+}
+.resid-hint{border:none !important;padding-left:0;padding-right:0;}
+@media(max-width:1279px){.st-side{margin-left:0 !important;}}
+.reg-block .st-head{color:#1f5fa8 !important;}
 </style>
 </head>
 <body>
@@ -380,13 +450,35 @@ footer p{font-family:'Caveat',cursive;font-weight:600;font-size:24px;color:#1118
 
   <p>However, <mark class="hl">elevation emerged as a key confounding factor</mark> influencing SOC distribution. Therefore, SOC values were normalised for the effects of elevation, in order to isolate the influence of grazing on SOC stocks within the Mara–Serengeti ecosystem. <em><mark class="hl">Grazed areas showed higher residual SOC than ungrazed areas</mark>.</em></p>
 
+  <div class="resid-wrap">
+  <aside class="resid-hint"><span class="hint-tag">What is residual SOC?</span>
+    <p>In this study, <b>Residual Soil Organic Carbon (SOC)</b> is the variance in soil carbon that remains unexplained after accounting for the elevation-predicted SOC.</p>
+    <p class="formula">Residual SOC = Observed SOC − Predicted SOC<sub>(Elevation)</sub></p>
+  </aside>
   <div class="chart-wrap">
     <div class="chart-title">Mean Residual SOC in Grazed areas vs in Ungrazed areas (t C/ha)</div>
     <div class="chart-canvas" style="height:220px">
       <canvas id="c-resid"></canvas>
     </div>
   </div>
+  </div>
   <p class="chart-callout"><span class="cc-arrow" aria-hidden="true"></span>After controlling for the confounding effect of elevation via OLS regression, grazed areas showed a mean residual SOC of 2.16 t C/ha, while ungrazed areas averaged −3.14 t C/ha.</p>
+
+  <div class="stats-block">
+    <p class="q-label st-head">Is the difference real? Statistical tests on residual SOC</p>
+    <p class="st-group">Significance tests</p>
+    <div class="st-grid st-3">
+      <div class="st-card w1"><span class="st-name">Welch's t-test</span><span class="st-val">t = 10.17</span><span class="st-p">p = 1.48 × 10<sup>−23</sup></span><span class="st-txt">Grazed areas have a significantly higher <b>mean</b> residual SOC than ungrazed areas.</span></div>
+      <div class="st-card w2"><span class="st-name">Mann–Whitney U test</span><span class="st-val">U = 1,114,567</span><span class="st-p">p = 9.38 × 10<sup>−72</sup></span><span class="st-txt">Grazed areas have a significantly higher <b>median</b> residual SOC.</span></div>
+      <div class="st-card w3"><span class="st-name">Kolmogorov–Smirnov test</span><span class="st-val">D = 0.418</span><span class="st-p">p = 2.97 × 10<sup>−97</sup></span><span class="st-txt">The <b>entire SOC distributions</b> differ, not just the mean and median.</span></div>
+    </div>
+    <p class="st-group">Effect sizes</p>
+    <div class="st-grid st-2">
+      <div class="st-card w4"><span class="st-name">Cohen's d</span><span class="st-val">d = 0.45</span><span class="st-p st-eff">effect size</span><span class="st-txt">The difference in means is strong enough to suggest grazing plays a real role in sustaining SOC.</span></div>
+      <div class="st-card w5"><span class="st-name">Cliff's delta</span><span class="st-val">δ = 0.417</span><span class="st-p st-eff">effect size</span><span class="st-txt">About a <b>42% higher chance</b> that a randomly chosen grazed area has more SOC than an ungrazed one.</span></div>
+    </div>
+    <p class="chart-callout st-side">All tests confirmed that grazed areas have significantly higher residual SOC than ungrazed areas, with effect sizes indicating a meaningful and consistent grazing effect beyond terrain effects.</p>
+  </div>
 
   <p>Grazed areas, which demonstrated enhanced vegetation regrowth, provided a <mark class="hl">continuous input of organic matter to the soil</mark> through both above and below ground biomass. In contrast, areas that were lightly grazed or were never grazed at all showed weaker vegetation responses and therefore, reduced organic matter inputs, which may limit SOC accumulation over time.</p>
 
@@ -399,6 +491,16 @@ footer p{font-family:'Caveat',cursive;font-weight:600;font-size:24px;color:#1118
     </div>
   </div>
   <p class="chart-callout"><span class="cc-arrow" aria-hidden="true"></span>Elevation dominates (β=0.67), followed by grazing (β=0.32), which remains statistically significant after controlling for all other predictors. Rainfall contributes only marginally (β=0.05). Overall model fit: R²=0.45.</p>
+
+  <div class="stats-block reg-block">
+    <p class="q-label st-head">What drives SOC? Multivariate regression</p>
+    <div class="st-grid st-3">
+      <div class="st-card w1"><span class="st-name">Model fit</span><span class="st-q">How well do all three factors together explain SOC?</span><span class="st-val">Adj. R² = 0.452</span><span class="st-p">F = 520.4 · p &lt; 2.2 × 10<sup>−16</sup></span><span class="st-txt">About <b>45% of SOC variation</b> is explained by elevation, grazing and rainfall combined.</span></div><div class="st-card w2"><span class="st-name">Standardised coefficients (β)</span><span class="st-q">Which factor has the strongest effect on the same scale?</span><span class="st-rows"><span class="st-row"><span>Elevation</span><b>0.67</b></span><span class="st-row"><span>Grazing</span><b>0.32</b></span><span class="st-row"><span>Rainfall</span><b>−0.05</b></span></span><span class="st-txt">Elevation is by far the strongest driver. <b>Grazing has a meaningful positive effect</b>; rainfall only a weak negative one.</span></div><div class="st-card w3"><span class="st-name">ANOVA (F-tests)</span><span class="st-q">Is each predictor's effect statistically significant?</span><span class="st-rows"><span class="st-row"><span>Elevation</span><b>F = 1471, p &lt; 0.001</b></span><span class="st-row"><span>Grazing</span><b>F = 92, p &lt; 0.001</b></span><span class="st-row"><span>Rainfall</span><b>F = 5.1, p = 0.024</b></span></span><span class="st-txt"><b>All three are significant.</b> Elevation dominates, grazing matters strongly, rainfall is weakest.</span></div>
+    </div>
+    <div class="st-grid st-3" style="margin-top:14px">
+      <div class="st-card w4"><span class="st-name">Relative importance</span><span class="st-q">How much of the explained variation belongs to each factor?</span><span class="st-rows"><span class="st-row"><span>Elevation</span><b>75.6%</b></span><span class="st-row"><span>Grazing</span><b>3.1%</b></span><span class="st-row"><span>Rainfall</span><b>11.3%</b></span></span><span class="st-txt">Elevation explains most large-scale variation; <b>grazing a small but real share</b>.</span></div><div class="st-card w5"><span class="st-name">Partial R²</span><span class="st-q">How much unique variation does each explain on its own?</span><span class="st-rows"><span class="st-row"><span>Elevation</span><b>36.9%</b></span><span class="st-row"><span>Grazing</span><b>3.5%</b></span><span class="st-row"><span>Rainfall</span><b>0.2%</b></span></span><span class="st-txt">Even after controlling for the others, <b>grazing keeps an independent effect</b>; rainfall adds almost nothing unique.</span></div><div class="st-card w6"><span class="st-name">Multicollinearity (VIF)</span><span class="st-q">Do the predictors overlap so much they confuse the model?</span><span class="st-rows"><span class="st-row"><span>Elevation</span><b>1.41</b></span><span class="st-row"><span>Rainfall</span><b>2.06</b></span><span class="st-row"><span>Grazing</span><b>1.22</b></span></span><span class="st-txt"><b>All below 5</b>, so each predictor explains something distinct about SOC.</span></div>
+    </div>
+  </div>
 
   <!-- LIMITATIONS -->
   <h2>Limitations</h2>
