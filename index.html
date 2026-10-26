@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mapping Our Living Planet</title>
+  <title>Festus Bett . Mapping Our Living Planet</title>
   <meta name="description" content="Conservation and environmental professional using geospatial technology." />
   <style>
     @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2')}
@@ -500,6 +500,18 @@ footer{border-top:none !important;box-shadow:none !important;}
 @media(max-width:375px){.hero-tags{font-size:13px;}.hero-tags .tag-sep{margin:0 5px;}}
 
 @media(max-width:600px){.hero-tags{row-gap:2px;}}
+
+/* show sketches on phones/tablets as two small rows */
+@media(max-width:900px){
+  .hero-h1{position:static !important;}
+  .hero-sk{display:flex !important;position:absolute;left:0;right:0;width:100% !important;height:auto !important;transform:none !important;justify-content:center;align-items:flex-end;gap:14px;pointer-events:none;}
+  .hero-sk-l{top:-74px;}
+  .hero-sk-r{top:auto;bottom:-82px;}
+  .hero-sk .hs{position:static !important;width:auto !important;height:46px;aspect-ratio:auto;}
+  .hero-sk .hs.pic{width:52px !important;height:46px;}
+  #hero{padding-bottom:110px !important;}
+}
+@media(max-width:600px){#hero{padding-top:96px !important;}}
 </style>
 </head>
 <body>
