@@ -516,6 +516,8 @@ footer{border-top:none !important;box-shadow:none !important;}
 /* tighten gap above Let's Connect */
 #contact{min-height:calc(100svh - var(--nav-h) - var(--foot-h,96px));display:flex;flex-direction:column;justify-content:center;padding-top:32px !important;padding-bottom:32px !important;scroll-margin-top:var(--nav-h);box-sizing:border-box;}
 #contact>.section-inner{width:100%;}
+.contact-sub{max-width:none !important;}
+@media(max-width:700px){.contact-sub br{display:none;}}
 </style>
 </head>
 <body>
@@ -635,7 +637,7 @@ footer{border-top:none !important;box-shadow:none !important;}
 <section id="contact">
   <div class="section-inner">
     <h2 class="contact-title">Let's Connect</h2>
-    <p class="contact-sub">Interested in Sustainable Development, Climate Change, Ecology, Conservation or Renewable Energy ? I would love to collaborate and explore new opportunities together.</p>
+    <p class="contact-sub">Interested in Sustainable Development, Climate Change, Ecology, Conservation or Renewable Energy?<br>I would love to collaborate and explore new opportunities together.</p>
     <div class="contact-cards">
       <div class="contact-card" style="cursor:pointer;" onclick="window.location='mai'+'lto:'+'festusbett'+'3501@gmail.com'">
         <div class="contact-icon"><span class="ci-img pic" role="img" aria-label="Email" style="background-image:url(assets/icon-email.png);aspect-ratio:124/122"></span></div>
