@@ -536,6 +536,18 @@ footer{border-top:none !important;box-shadow:none !important;}
 .fb-status{text-align:center;font-family:'Caveat',cursive;font-weight:600;font-size:24px;color:#1d7a4c;min-height:1.2em;margin:0;}
 #contact{padding-top:48px !important;padding-bottom:56px !important;}
 @media(max-width:600px){.fb-row{grid-template-columns:1fr;}.write-me{margin-top:40px;}}
+
+/* hero sketches: 50% smaller, pushed further out */
+@media(min-width:901px){
+  .hero-sk{transform:scale(.5) !important;}
+  .hero-sk-l{right:calc(50% + 420px) !important;transform-origin:right center !important;}
+  .hero-sk-r{left:calc(50% + 420px) !important;transform-origin:left center !important;}
+}
+@media(min-width:901px) and (max-width:1180px){
+  .hero-sk{transform:scale(.4) !important;}
+  .hero-sk-l{right:calc(50% + 360px) !important;}
+  .hero-sk-r{left:calc(50% + 360px) !important;}
+}
 </style>
 </head>
 <body>
@@ -680,7 +692,7 @@ footer{border-top:none !important;box-shadow:none !important;}
           <label><span>Your name</span><input type="text" name="name" autocomplete="name" required></label>
           <label><span>Your email</span><input type="email" name="email" autocomplete="email" required></label>
         </div>
-        <label><span>Your message</span><textarea name="message" rows="5" required placeholder="What's your message?"></textarea></label>
+        <label><span>Your message</span><textarea name="message" rows="5" required placeholder="What's your message"></textarea></label>
         <input type="hidden" name="_subject" value="New message from festusbett.com">
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="fb-hp" aria-hidden="true">
         <button type="submit" class="fb-send">Send message</button>
