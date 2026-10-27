@@ -518,6 +518,24 @@ footer{border-top:none !important;box-shadow:none !important;}
 #contact>.section-inner{width:100%;}
 .contact-sub{max-width:none !important;}
 @media(max-width:700px){.contact-sub br{display:none;}}
+
+/* contact spacing + write-to-me form */
+.contact-sub{line-height:2 !important;margin-bottom:44px !important;}
+.write-me{max-width:620px;margin:52px auto 0;text-align:left;}
+.wm-label{font-family:'Caveat',cursive;font-weight:600;font-size:28px;color:#1f5fa8;text-align:center;margin:0 0 14px;transform:rotate(-1.5deg);}
+.fb-form{display:grid;gap:1rem;}
+.fb-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.fb-form label{display:grid;gap:.3rem;}
+.fb-form label span{font-family:'Caveat',cursive;font-weight:600;font-size:23px;line-height:1;color:#cf3b2b;}
+.fb-form input,.fb-form textarea{font:inherit;font-size:1rem;color:#111827;border:none;outline:none;padding:.75rem 1rem;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath d='M8 5 C80 2 200 3 292 5 C297 20 296 40 293 55 C200 58 90 58 6 55 C3 40 3 20 8 5 Z' fill='rgba(255,255,255,.55)' stroke='%23111827' stroke-width='1.6' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") no-repeat center/100% 100%;resize:vertical;}
+.fb-form input:focus,.fb-form textarea:focus{outline:none;box-shadow:none;}
+.fb-hp{position:absolute;left:-9999px;}
+.fb-send{justify-self:center;font-family:'Caveat',cursive;font-weight:600;font-size:26px;line-height:1;color:#fff;border:none;cursor:pointer;padding:14px 34px 16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 80' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-5%25' y='-10%25' width='110%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.045 .6' numOctaves='3' seed='7' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='9'/%3E%3C/filter%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -2.2 1.25'/%3E%3C/filter%3E%3Cg filter='url(%23r)'%3E%3Cpath d='M22 10 C90 5 190 7 278 9 C292 12 296 28 294 44 C293 60 288 70 276 72 C190 77 100 76 24 73 C10 71 5 58 5 42 C5 26 10 13 22 10 Z' fill='%231d7a4c'/%3E%3C/g%3E%3Crect width='300' height='80' filter='url(%23g)' opacity='.18'/%3E%3C/svg%3E") no-repeat center/100% 100%;transition:transform .15s;}
+.fb-send:hover{transform:translateY(-2px) rotate(-1deg);}
+.fb-send[disabled]{opacity:.6;cursor:default;}
+.fb-status{text-align:center;font-family:'Caveat',cursive;font-weight:600;font-size:24px;color:#1d7a4c;min-height:1.2em;margin:0;}
+#contact{padding-top:48px !important;padding-bottom:56px !important;}
+@media(max-width:600px){.fb-row{grid-template-columns:1fr;}.write-me{margin-top:40px;}}
 </style>
 </head>
 <body>
@@ -637,7 +655,7 @@ footer{border-top:none !important;box-shadow:none !important;}
 <section id="contact">
   <div class="section-inner">
     <h2 class="contact-title">Let's Connect</h2>
-    <p class="contact-sub">Interested in Sustainable Development, Climate Change, Ecology, Conservation or Renewable Energy?<br>I would love to collaborate and explore new opportunities together.</p>
+    <p class="contact-sub">Interested in Sustainable Development, Climate Change, Ecology, Conservation or Renewable Energy? <br>I would love to collaborate and explore new opportunities together.</p>
     <div class="contact-cards">
       <div class="contact-card" style="cursor:pointer;" onclick="window.location='mai'+'lto:'+'festusbett'+'3501@gmail.com'">
         <div class="contact-icon"><span class="ci-img pic" role="img" aria-label="Email" style="background-image:url(assets/icon-email.png);aspect-ratio:124/122"></span></div>
@@ -654,6 +672,20 @@ footer{border-top:none !important;box-shadow:none !important;}
         <span class="contact-label">LinkedIn</span>
         <span class="contact-value">brunofestusbett</span>
       </a>
+    </div>
+    <div class="write-me">
+      <p class="wm-label">Or write to me here</p>
+      <form class="fb-form" id="fb-form" action="https://formspree.io/f/xgaaknyv" method="POST">
+        <div class="fb-row">
+          <label><span>Your name</span><input type="text" name="name" autocomplete="name" required></label>
+          <label><span>Your email</span><input type="email" name="email" autocomplete="email" required></label>
+        </div>
+        <label><span>Your message</span><textarea name="message" rows="5" required placeholder="What would you like to talk about?"></textarea></label>
+        <input type="hidden" name="_subject" value="New message from festusbett.com">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="fb-hp" aria-hidden="true">
+        <button type="submit" class="fb-send">Send message</button>
+        <p class="fb-status" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -679,6 +711,21 @@ footer{border-top:none !important;box-shadow:none !important;}
 <script>
 (function(){function f(){var ft=document.querySelector('footer');if(ft)document.documentElement.style.setProperty('--foot-h',ft.offsetHeight+'px');}
 window.addEventListener('load',f);window.addEventListener('resize',f);})();
+</script>
+<script>
+(function(){
+  var f=document.getElementById('fb-form'); if(!f) return;
+  var st=f.querySelector('.fb-status'), btn=f.querySelector('.fb-send');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(/\/f\/YOUR_[A-Z_]+$/.test(f.action)){ st.textContent='Feedback form not connected yet.'; return; }
+    btn.disabled=true; st.textContent='Sending…';
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+      .then(function(r){ if(r.ok){ f.reset(); st.textContent='Thank you! Your thoughts are on their way.'; } else { throw 0; } })
+      .catch(function(){ st.textContent='Sorry, that didn’t send. Please try again.'; })
+      .finally(function(){ btn.disabled=false; });
+  });
+})();
 </script>
 </body>
 </html>
